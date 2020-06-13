@@ -1,4 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>Welcome to login page</h1>
+<-- Dummy Form for testing... -->
+<form action="" method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.username.label }}
+	{{ form.username }}
+	{{ form.password.label }}
+	{{ form.password }}
+	{{ form.submit }}
+	<div>
+		{% for error in form.password.errors %}
+			<span>{{ error }}</span>
+		{% endfor %}
+	</div>
+</form>
 {% endblock content %}

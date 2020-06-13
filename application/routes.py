@@ -1,16 +1,28 @@
-from application import app
+from application import app, db
 from application.forms import LoginForm
-from flask import render_template, redirect, flash
+from application.models import User
+from flask import render_template, redirect, flash, url_for#, session
 
 @app.route("/")
 def home():
-	return render_template("home.html", title="Home")
+	return render_template("home.html", title="Home", role=session['ROLE'])
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-	form = LoginForm
-	if validate_on_submit():
-		flash("Successfully logged in!!!", category="success")
-		return redirect('home.html', title="Home")
+	###########will add the session later... facing some issues...############
+	#if session['USER_ID']:
+	#	return redirect(url_for('home'))
+	#else:
+	form = LoginForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(user_id=form.username.data).first()
+		if user.password == form.password.data:
+			flash("Successfully logged in!!!", category="success")
+			session['USER_ID'] = user.user_id
+			session['ROLE'] = user.role
+			return redirect('home.html', title="Home", form=form)
+		else:
+			flash("Wrong password entered!!!", category="danger")
 	else:
-		return render_template("login.html", title="Login", form=form)
+		flash("Wrong username entered!!!", category="danger")
+	return render_template("login.html", title="Login", form=form)

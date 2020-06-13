@@ -18,7 +18,7 @@ class Customer(db.Model):
 	cust_contact = db.Column(db.Integer, nullable=False)
 	cust_age = db.Column(db.Integer, nullable=False)
 	accounts = db.relationship('Account', backref='owner', lazy=True)
-	transactions = db.relationship('Transactions', backref='owner', lazy=True)
+	transactions = db.relationship('Transaction', backref='owner', lazy=True)
 
 	def __repr__(self):
 		return f"Customer('{self.cust_id}', '{self.cust_name}')"

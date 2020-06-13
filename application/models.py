@@ -17,8 +17,8 @@ class Customer(db.Model):
 	cust_address = db.Column(db.Text, nullable=False)
 	cust_contact = db.Column(db.Integer, nullable=False)
 	cust_age = db.Column(db.Integer, nullable=False)
-	accounts = db.relationship('Account', backref='Owner', lazy=True)
-	transactions = db.relationship('Transactions', backref='Owner', lazy=True)
+	accounts = db.relationship('Account', backref='owner', lazy=True)
+	transactions = db.relationship('Transactions', backref='owner', lazy=True)
 
 	def __repr__(self):
 		return f"Customer('{self.cust_id}', '{self.cust_name}')"
@@ -33,7 +33,7 @@ class Account(db.Model):
 	def __repr__(self):
 		return f"Account('{self.acc_no}', '{self.acc_type}', '{self.acc_balance}', '{self.acc_createDate}')"
 
-class Transactions(db.Model):
+class Transaction(db.Model):
 	transaction_id = db.Column(db.Integer, primary_key=True)
 	transaction_date = db.Column(db.DateTime, nullable=False, default=d.today())
 	transaction_amount = db.Column(db.Float, nullable=False)

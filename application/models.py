@@ -9,6 +9,8 @@ class User(db.Model):
 	def __repr__(self):
 		return f"User('{self.id}', '{self.role}')"
 
+# test comment
+
 
 class Customer(db.Model):
 	ssn = db.Column(db.Integer, primary_key=True)

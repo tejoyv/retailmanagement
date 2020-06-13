@@ -1,4 +1,4 @@
-from application import app, db
+from application import app, db, bcrypt
 from application.forms import LoginForm
 from application.models import User
 from flask import render_template, redirect, flash, url_for, session
@@ -15,7 +15,7 @@ def login():
 		form = LoginForm()
 		if form.validate_on_submit():
 			user = User.query.filter_by(user_id=form.username.data).first()
-			if user.password == form.password.data:
+			if bcrypt.check_password_hash(user.password, form.password.data):
 				flash("Successfully logged in!!!", category="success")
 				session['USER_ID'] = user.user_id
 				session['ROLE'] = user.role

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField,IntegerField,TextField,SelectField
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms import StringField, PasswordField, SubmitField,IntegerField,TextField,SelectField,TextAreaField
+from wtforms.validators import DataRequired, Length, ValidationError,Email
 from application.models import User,Customer
 
 class LoginForm(FlaskForm):
@@ -48,3 +48,9 @@ class RegisterationForm(FlaskForm):
         if len(cust_age.data>3):
             raise ValidationError("Age should be not more than 3 digit numeric")
 
+class ContactForm(FlaskForm):
+	fullName = TextField('First Name',validators=[DataRequired()])
+	email = TextField('E-mail',validators=[DataRequired(), Email()])
+	subject = TextField('Subject',validators=[DataRequired()])
+	message = TextAreaField('Message',validators=[DataRequired()])
+	submit = SubmitField('Send')

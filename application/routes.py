@@ -40,3 +40,12 @@ def register():
         return redirect("/register")
     return render_template("register.html",customer=customer,form=form)
 
+
+@app.route("/view_status", methods=['GET', 'POST'])
+def viewStatus():
+	if session.get('ROLE') != "acc_exec":
+		return "Action Not Allowed"
+	else:
+		page = request.args.get('page', 1, type=int)
+		customers = Customer.query.order_by(Customer.cust_id).paginate(page=page, per_page=10)
+		return render_template('view_status.html', customers=customers)

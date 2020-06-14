@@ -2,14 +2,12 @@ from application import db
 from datetime import datetime as d
 
 class User(db.Model):
-	id = db.Column(db.String(20), primary_key=True, nullable=False)
+	user_id = db.Column(db.String(20), primary_key=True, nullable=False)
 	password = db.Column(db.String(10), nullable=False)
 	role = db.Column(db.String(10), nullable=False)
 	
 	def __repr__(self):
 		return f"User('{self.id}', '{self.role}')"
-
-# test comment
 
 
 class Customer(db.Model):
@@ -19,6 +17,8 @@ class Customer(db.Model):
 	cust_address = db.Column(db.Text, nullable=False)
 	cust_contact = db.Column(db.Integer, nullable=False)
 	cust_age = db.Column(db.Integer, nullable=False)
+	cust_state = db.Column(db.String(20),nullable=False)
+	cust_city = db.Column(db.String(30),nullable=False)
 	accounts = db.relationship('Account', backref='Owner', lazy=True)
 	transactions = db.relationship('Transactions', backref='Owner', lazy=True)
 

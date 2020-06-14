@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<-- Dummy Form for testing... -->
+<form action="" method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.ssn_id.label }}
+	{{ form.ssn_id }}
+	{{ form.cust_name.label }}
+    {{ form.cust_name }}
+    {{ form.cust_age.label }}
+    {{ form.cust_age }}
+    {{ form.address.label }}
+    {{ form.address }}
+    {{ form.state.label }}
+    {{ form.state }}
+    {{ form.city.label }}
+    {{ form.city }}
+	{{ form.submit }}
+	<div>
+		{% for error in form.password.errors %}
+			<span>{{ error }}</span>
+		{% endfor %}
+	</div>
+</form>
+{% endblock content %}

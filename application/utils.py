@@ -1,5 +1,6 @@
-from application import db
+from application import db,mail
 from application.models import Customer, Account, Transaction
+from flask_mail import Message
 
 def searchCustomer(ssn=None, cust_id=None):
 	if ssn != None:
@@ -75,3 +76,9 @@ def transferMoney(amount, cust_id, from_acc, to_acc):
 		db.session.add(transaction)
 		db.session.commit()
 		return "Success"
+
+def mail_send(fullname,email,message):
+	msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=[email])
+	msg.body = message
+	mail.send(msg)
+	return "Mail Sent"	

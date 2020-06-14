@@ -17,8 +17,10 @@ class Customer(db.Model):
 	cust_address = db.Column(db.Text, nullable=False)
 	cust_contact = db.Column(db.Integer, nullable=False)
 	cust_age = db.Column(db.Integer, nullable=False)
-	accounts = db.relationship('Account', backref='owner', lazy=True)
-	transactions = db.relationship('Transaction', backref='owner', lazy=True)
+	cust_state = db.Column(db.String(20),nullable=False)
+	cust_city = db.Column(db.String(30),nullable=False)
+	accounts = db.relationship('Account', backref='Owner', lazy=True)
+	transactions = db.relationship('Transaction', backref='Owner', lazy=True)
 
 	def __repr__(self):
 		return f"Customer('{self.cust_id}', '{self.cust_name}')"

@@ -1,11 +1,13 @@
 from application import app, db, bcrypt
-from application.forms import LoginForm
-from application.models import User
-from flask import render_template, redirect, flash, url_for, session
+from application.forms import LoginForm, RegistrationForm
+from application.models import User, Customer
+from flask import render_template, redirect, flash, url_for, session, request
+
 
 @app.route("/")
 def home():
 	return render_template("home.html", title="Home", role=session.get('ROLE'))
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -25,3 +27,16 @@ def login():
 		else:
 			flash("Wrong username entered!!!", category="danger")
 		return render_template("login.html", title="Login", form=form)
+  
+ 
+@app.route("/register",methods=["GET","POST"])
+def register():
+    form = RegisterationForm()
+    if form.validate_on_submit():
+        customer = Customer(ssn=form.ssn_id.data,cust_name=form.cust_name.data,
+                           cust_age=form.cust_age.data,cust_address=form.address.data,cust_state=form.state.data,cust_city=form.city.data)
+        db.session.add(customer)
+        db.session.commit()
+        return redirect("/register")
+    return render_template("register.html",customer=customer,form=form)
+

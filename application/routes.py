@@ -1,5 +1,5 @@
 from application import app, db, bcrypt
-from application.forms import LoginForm, RegistrationForm
+from application.forms import LoginForm, RegisterationForm
 from application.models import User, Customer
 from flask import render_template, redirect, flash, url_for, session, request
 

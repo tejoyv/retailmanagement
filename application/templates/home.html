@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!-- <<<<<<< HEAD
 <h1>Welcome to home page</h1>
 
-<!-- Dummy contactform for testing... -->
+
 <form action="" method="POST">
 	{{ form.hidden_tag() }}
 	{{ form.fullName.label }}
@@ -15,4 +16,259 @@
 	{{ form.submit }}
 </form>
 {{ role }}
+=======
+-->
+    <!-- Code block for intoduction section -->
+    <div class="container-fluid gtco-banner-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Does your <strong>money</strong> need speed?</h1>
+                    <p> Our company can assist you with any aspect of investment management. </p>
+
+                    <a href="#contact">CONTACT US <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card"><img class="card-img-top img-fluid" src="static/images/banner-img.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code block for Services offered section -->
+    <div class="container-fluid gtco-features" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2> Explore The Services<br />
+                        We Offer For You </h2>
+                    <p>Protect your loved ones and you with our wide range of plans that offer you guaranteed and
+                        secured future.</p>
+                </div>
+                <div class="col-lg-8">
+                    <svg id="bg-services" width="100%" viewBox="0 0 1000 800">
+                        <defs>
+                            <linearGradient id="PSgrad_02" x1="64.279%" x2="0%" y1="76.604%" y2="0%">
+                                <stop offset="0%" stop-color="rgb(1,230,248)" stop-opacity="1" />
+                                <stop offset="100%" stop-color="rgb(29,62,222)" stop-opacity="1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill-rule="evenodd" opacity="0.102" fill="url(#PSgrad_02)"
+                            d="M801.878,3.146 L116.381,128.537 C26.052,145.060 -21.235,229.535 9.856,312.073 L159.806,710.157 C184.515,775.753 264.901,810.334 338.020,792.380 L907.021,652.668 C972.912,636.489 1019.383,573.766 1011.301,510.470 L962.013,124.412 C951.950,45.594 881.254,-11.373 801.878,3.146 Z" />
+                    </svg>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="static/images/banking.png" alt=""></div>
+                                <div class="card-body">
+                                    <h3 class="card-title">Net Banking</h3>
+                                    <p class="card-text">Moody Bank provides easy steps to start online banking.
+                                        Assistance is available 24/7 for customers. Avail a variety of benefits and
+                                        services through the online banking service.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="static/images/locker.png" alt=""></div>
+
+                                <div class="card-body">
+                                    <h3 class="card-title">Locker Facility</h3>
+                                    <p class="card-text">Get peace of mind with Moody Safe Deposit Lockers. We provide
+                                        security to your precious jewellery,
+                                        documents and other valuables.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="static/images/loan.png" alt=""></div>
+
+                                <div class="card-body">
+                                    <h3 class="card-title">Loans</h3>
+                                    <p class="card-text">Explore our wide range of loans that fits into your
+                                        requirements and lets you achieve your goals.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="static/images/family-insurance.png" alt="">
+                                </div>
+
+                                <div class="card-body">
+                                    <h3 class="card-title">Insurance Schemes</h3>
+                                    <p class="card-text">Get assured compensation of financial losses during medical and
+                                        non-medical emergencies, with our comprehensive health, travel and life
+                                        insurance products.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- code block for statistics -->
+    <div class="container-fluid gtco-numbers-block">
+        <div class="container">
+            <svg width="100%" viewBox="0 0 1600 400">
+                <defs>
+                    <linearGradient id="PSgrad_03" x1="80.279%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="rgb(1,230,248)" stop-opacity="1" />
+                        <stop offset="100%" stop-color="rgb(29,62,222)" stop-opacity="1" />
+                    </linearGradient>
+                </defs>
+
+                <path fill-rule="evenodd" fill="url(#PSgrad_03)"
+                    d="M98.891,386.002 L1527.942,380.805 C1581.806,380.610 1599.093,335.367 1570.005,284.353 L1480.254,126.948 C1458.704,89.153 1408.314,59.820 1366.025,57.550 L298.504,0.261 C238.784,-2.944 166.619,25.419 138.312,70.265 L16.944,262.546 C-24.214,327.750 12.103,386.317 98.891,386.002 Z">
+                </path>
+
+                <clipPath id="ctm" fill="none">
+                    <path
+                        d="M98.891,386.002 L1527.942,380.805 C1581.806,380.610 1599.093,335.367 1570.005,284.353 L1480.254,126.948 C1458.704,89.153 1408.314,59.820 1366.025,57.550 L298.504,0.261 C238.784,-2.944 166.619,25.419 138.312,70.265 L16.944,262.546 C-24.214,327.750 12.103,386.317 98.891,386.002 Z">
+                    </path>
+                </clipPath>
+
+                <!-- xlink:href for modern browsers, src for IE8- -->
+                <image clip-path="url(#ctm)" xlink:href="static/images/word-map.png" height="800px" width="100%"
+                    class="svg__image">
+                </image>
+            </svg>
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">10+</h5>
+                            <p class="card-text">Years of Experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">87500+ </h5>
+                            <p class="card-text">Happy Customers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">186</h5>
+                            <p class="card-text">Branches Worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">05 </h5>
+                            <p class="card-text">Countries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- code block for testimonial section -->
+    <div class="container-fluid gtco-testimonials" id="testinomials">
+        <div class="container">
+            <h2>What our customers say about us.</h2>
+            <div class="owl-carousel owl-carousel1 owl-theme">
+                <div>
+                    <div class="card text-center"><img class="card-img-top" src="static/images/customer1.jpg" alt="">
+                        <div class="card-body">
+                            <h5>Prexa Patel <br /></h5>
+                            <p class="card-text">“ Without the support and expertise of our local bank, we could not
+                                have grown as quickly as desired. Our local bank knows our business and always responds
+                                to meet our needs.” </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center"><img class="card-img-top" src="static/images/customer2.jpg" alt="">
+                        <div class="card-body">
+                            <h5>Tejas Solanki<br /></h5>
+                            <p class="card-text">"Moody Bank has provided us with the support and service I can trust to
+                                operate a resilient and healthy farm."</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center"><img class="card-img-top" src="static/images/customer3.jpg" alt="">
+                        <div class="card-body">
+                            <h5>Julie Bhavsar<br /></h5>
+                            <p class="card-text">"My experience with transitioning has been great. Everyone at the bank
+                                has been extremely accommodating. They make me feel that my business matters. I like
+                                that the bank still feels like a small town bank even though we are in quite a large
+                                community."" </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center"><img class="card-img-top" src="static/images/customer4.jpg" alt="">
+                        <div class="card-body">
+                            <h5>Jonnathan Dcruz<br /></h5>
+                            <p class="card-text">"The successful expansion of my hospital was made possible by Moody
+                                Bank. Because of their responsiveness and expertise the process was efficient and
+                                smooth, and our business is thriving." </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<br>
+	<!-- code block for contact us section -->
+    <footer class="container-fluid" id="gtco-footer">
+		<form action="" method="POST" novalidate>
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="contact">
+                    <br />
+                    <h2 style="color:#1d3ede">
+                        <centre>Contact Us </centre>
+                    </h2><br/>
+                    <input type="text" class="form-control" placeholder="Full Name" name="fullname">
+                    <input type="email" class="form-control" placeholder="Email Address" name="email">
+                    <textarea class="form-control" placeholder="Message" name="message"></textarea>
+                    <a href="#"><input type="submit" class="submit-button" value="Submit"></a>
+				</div>
+				</form>
+                <div class="col-md-4 text-center">
+                    <div class="info">
+                        <h4>Say Hello</h4>
+                        <h2>Get in touch</h2>
+                        <p>We're here to help and answer any questions you might have. Whether you have a question about
+                            Interest Rates, Home Loans, Bank Locker, Insurance schemes, or anything else, our team is
+                            ready to answer all your questions.</p>
+                        <pre><h5 style="color:blue;">Call us now</h5></pre>
+                        <hr>
+                        <a href="tel:+91 9876543210">
+                            <h5><i class="fa fa-phone"> +91 9876543210</i></h5>
+                        </a>
+                        <br />
+                        <h5><i class="fa fa-envelope"> moody01@gmail.com</i></h5>
+                        <br />
+                        <a>
+                            <h5><i class="fa fa-map-marker"> INDIA <br> Raveline Street, Fort<br> Mumbai, Maharashtra
+                                    400001 </i></h5>
+                        </a>
+                        <br />
+                        <h5><i class="fa fa-clock-o"> 9AM to 5PM IST (Mon-Fri)</i></h5>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center">
+                    <p>&copy; 2020 Moody Bank. All Rights Reserved. Designed by <span
+                            style="color: #1d3ede;">AVENGERS</span>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+<!--
+>>>>>>> 82558e6cb291c7d99e6a72df573b85bf13f739a2 -->
 {% endblock content %}

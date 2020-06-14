@@ -1,11 +1,13 @@
-from application import app, db, bcrypt,mail
+from application import app, db, bcrypt, mail
 from application.forms import LoginForm, RegisterationForm, ContactForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
+from application.utils import mail_send
 
 @app.route("/",methods=["GET","POST"])
 def home():
+	'''<<<<<<< HEAD
 	msg=""
 	form = ContactForm()
 	if form.validate_on_submit():	
@@ -14,6 +16,19 @@ def home():
 		mail.send(msg)
 		return "Sent"
 	return render_template("home.html",title="Home", form=form, role=session.get('ROLE'))
+	======='''
+	form = ContactForm()
+	if request.method == "POST":
+		print("hello")
+		fullname = request.form.get('fullname')
+		email = request.form.get('email')
+		message = request.form.get('message')
+
+		value = mail_send(fullname,email,message)
+		return value
+	else:
+		return render_template("home.html", title="Moody Bank", role=session.get('ROLE'), form=form)
+	#>>>>>>> 82558e6cb291c7d99e6a72df573b85bf13f739a2
 
 
 @app.route("/login", methods=['GET', 'POST'])

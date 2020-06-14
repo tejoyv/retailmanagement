@@ -1,12 +1,19 @@
-from application import app, db, bcrypt
-from application.forms import LoginForm, RegisterationForm
+from application import app, db, bcrypt,mail
+from application.forms import LoginForm, RegisterationForm, ContactForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
+from flask_mail import Message
 
-
-@app.route("/")
+@app.route("/",methods=["GET","POST"])
 def home():
-	return render_template("home.html", title="Home", role=session.get('ROLE'))
+	msg=""
+	contactform = ContactForm()
+	if contactform.validate_on_submit():	
+		msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=["tejoyv@gmail.com"])
+		msg.body = "Hello Flask message sent from Flask-Mail"
+		mail.send(msg)
+		return "Sent"
+	return render_template("home.html",title="Home",contactform=contactform,role=session.get('ROLE'))
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -33,12 +40,12 @@ def login():
 def register():
     form = RegisterationForm()
     if form.validate_on_submit():
-        customer = Customer(ssn=form.ssn_id.data,cust_name=form.cust_name.data,
-                           cust_age=form.cust_age.data,cust_address=form.address.data,cust_state=form.state.data,cust_city=form.city.data)
+        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data,
+                           cust_address=form.address.data,cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
         db.session.add(customer)
         db.session.commit()
         return redirect("/register")
-    return render_template("register.html",customer=customer,form=form)
+    return render_template("register.html",form=form)
 
 
 @app.route("/view_customers_status", methods=['GET', 'POST'])

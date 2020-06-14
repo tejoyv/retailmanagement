@@ -1,4 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1>Welcome to home page</h1>
+
+<!-- Dummy contactform for testing... -->
+<form action="" method="POST">
+	{{ contactform.hidden_tag() }}
+	{{ contactform.fullName.label }}
+	{{ contactform.fullName }}
+	{{ contactform.email.label }}
+    {{ contactform.email }}
+    {{ contactform.message.label }}
+	{{ contactform.message }}
+    
+	{{ contactform.submit }}
+</form>
 {% endblock content %}

@@ -15,11 +15,11 @@
 	{% for account in accounts.items %}
 	<tr>
 		<td>{{ account.cust_id }}</td>
-		<td>{{ account.acc_id }}</td>
+		<td>{{ account.acc_no }}</td>
 		<td>{{ account.acc_type }}</td>
 		<td>{{ account.acc_createDate }}</td>
 		<td>{{ account.acc_balance }}</td>
-		<td>{{ account.owner.transactions[-1].transaction_date }}</td>
+		<td>{{ account.Owner.transactions[-1].transaction_date }}</td>
 	</tr>
 	{% endfor%}
 </table>

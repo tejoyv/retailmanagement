@@ -7,13 +7,13 @@ from flask_mail import Message
 @app.route("/",methods=["GET","POST"])
 def home():
 	msg=""
-	contactform = ContactForm()
-	if contactform.validate_on_submit():	
+	form = ContactForm()
+	if form.validate_on_submit():	
 		msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=["tejoyv@gmail.com"])
 		msg.body = "Hello Flask message sent from Flask-Mail"
 		mail.send(msg)
 		return "Sent"
-	return render_template("home.html",title="Home",contactform=contactform,role=session.get('ROLE'))
+	return render_template("home.html",title="Home", form=form, role=session.get('ROLE'))
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -28,7 +28,7 @@ def login():
 				flash("Successfully logged in!!!", category="success")
 				session['USER_ID'] = user.user_id
 				session['ROLE'] = user.role
-				return redirect('home.html', title="Home", role=session.get('ROLE'))
+				return redirect(url_for('home'))
 			else:
 				flash("Wrong password entered!!!", category="danger")
 		else:
@@ -38,14 +38,17 @@ def login():
  
 @app.route("/register",methods=["GET","POST"])
 def register():
-    form = RegisterationForm()
-    if form.validate_on_submit():
-        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data,
-                           cust_address=form.address.data,cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
-        db.session.add(customer)
-        db.session.commit()
-        return redirect("/register")
-    return render_template("register.html",form=form)
+	if session.get('ROLE') != "acc_exec":
+		return "Action Not Allowed"
+	else:
+	    form = RegisterationForm()
+	    if form.validate_on_submit():
+	        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data,
+	                           cust_address=form.address.data,cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
+	        db.session.add(customer)
+	        db.session.commit()
+	        return redirect("/register")
+	    return render_template("register.html",form=form)
 
 
 @app.route("/view_customers_status", methods=['GET', 'POST'])
@@ -55,7 +58,7 @@ def viewCustomersStatus():
 	else:
 		page = request.args.get('page', 1, type=int)
 		customers = Customer.query.order_by(Customer.cust_id).paginate(page=page, per_page=10)
-		return render_template('view_status.html', customers=customers)
+		return render_template("view_customers_status.html", customers=customers)
 
 
 @app.route("/view_accounts_status", methods=['GET', 'POST'])
@@ -64,5 +67,11 @@ def viewAccountsStatus():
 		return "Action Not Allowed"
 	else:
 		page = request.args.get('page', 1, type=int)
-		customers = Account.query.order_by(Account.acc_id).paginate(page=page, per_page=10)
-		return render_template('view_status.html', accounts=accounts)
+		accounts = Account.query.order_by(Account.acc_no).paginate(page=page, per_page=10)
+		return render_template("view_accounts_status.html", accounts=accounts)
+
+@app.route("/logout", methods=['GET', 'POST'])
+def logout():
+	session['USER_ID'] = None
+	session['ROLE'] = None
+	return redirect(url_for('home'))

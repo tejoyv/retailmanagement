@@ -4,14 +4,15 @@
 
 <!-- Dummy contactform for testing... -->
 <form action="" method="POST">
-	{{ contactform.hidden_tag() }}
-	{{ contactform.fullName.label }}
-	{{ contactform.fullName }}
-	{{ contactform.email.label }}
-    {{ contactform.email }}
-    {{ contactform.message.label }}
-	{{ contactform.message }}
+	{{ form.hidden_tag() }}
+	{{ form.fullName.label }}
+	{{ form.fullName }}
+	{{ form.email.label }}
+    {{ form.email }}
+    {{ form.message.label }}
+	{{ form.message }}
     
-	{{ contactform.submit }}
+	{{ form.submit }}
 </form>
+{{ role }}
 {% endblock content %}

@@ -1,19 +1,22 @@
 from application import app, db, bcrypt,mail
-from application.forms import LoginForm, RegisterationForm,ContactForm
+from application.forms import LoginForm, RegisterationForm
 from application.models import User, Customer
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
 
 @app.route("/",methods=["GET","POST"])
 def home():
-	msg=""
-	contactform = ContactForm()
-	if contactform.validate_on_submit():	
-		msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=["tejoyv@gmail.com"])
-		msg.body = "Hello Flask message sent from Flask-Mail"
+	if request.method == "POST":
+		print("hello")
+		fullname = request.form.get('fullname')
+		email = request.form.get('email')
+		message = request.form.get('message')
+		msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=[email])
+		msg.body = message
 		mail.send(msg)
-		return "Sent"
-	return render_template("home.html",title="Home",contactform=contactform,role=session.get('ROLE'))
+		return "Mail Sent"	
+	else:
+		return render_template("home.html",title="Moody Bank",role=session.get('ROLE'))
 
 
 @app.route("/login", methods=['GET', 'POST'])

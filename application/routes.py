@@ -3,6 +3,7 @@ from application.forms import LoginForm, RegisterationForm
 from application.models import User, Customer
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
+from application.utils import mail_send
 
 @app.route("/",methods=["GET","POST"])
 def home():
@@ -11,10 +12,9 @@ def home():
 		fullname = request.form.get('fullname')
 		email = request.form.get('email')
 		message = request.form.get('message')
-		msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=[email])
-		msg.body = message
-		mail.send(msg)
-		return "Mail Sent"	
+
+		value = mail_send(fullname,email,message)
+		return value
 	else:
 		return render_template("home.html",title="Moody Bank",role=session.get('ROLE'))
 

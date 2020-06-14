@@ -1,6 +1,6 @@
 from application import app, db, bcrypt
 from application.forms import LoginForm, RegisterationForm
-from application.models import User, Customer
+from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 
 
@@ -41,11 +41,21 @@ def register():
     return render_template("register.html",customer=customer,form=form)
 
 
-@app.route("/view_status", methods=['GET', 'POST'])
-def viewStatus():
+@app.route("/view_customers_status", methods=['GET', 'POST'])
+def viewCustomersStatus():
 	if session.get('ROLE') != "acc_exec":
 		return "Action Not Allowed"
 	else:
 		page = request.args.get('page', 1, type=int)
 		customers = Customer.query.order_by(Customer.cust_id).paginate(page=page, per_page=10)
 		return render_template('view_status.html', customers=customers)
+
+
+@app.route("/view_accounts_status", methods=['GET', 'POST'])
+def viewAccountsStatus():
+	if session.get('ROLE') != "acc_exec":
+		return "Action Not Allowed"
+	else:
+		page = request.args.get('page', 1, type=int)
+		customers = Account.query.order_by(Account.acc_id).paginate(page=page, per_page=10)
+		return render_template('view_status.html', accounts=accounts)

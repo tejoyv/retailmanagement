@@ -67,7 +67,7 @@ def register():
 
 
 @app.route("/view_customers_status", methods=['GET', 'POST'])
-def viewCustomersStatus():
+def view_customers_status():
 	if session.get('ROLE') != "acc_exec":
 		return "Action Not Allowed"
 	else:
@@ -77,7 +77,7 @@ def viewCustomersStatus():
 
 
 @app.route("/view_accounts_status", methods=['GET', 'POST'])
-def viewAccountsStatus():
+def view_accounts_status():
 	if session.get('ROLE') != "acc_exec":
 		return "Action Not Allowed"
 	else:

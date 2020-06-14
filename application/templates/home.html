@@ -1,23 +1,5 @@
 {% extends 'layout.html' %}
 {% block content %}
-<!-- <<<<<<< HEAD
-<h1>Welcome to home page</h1>
-
-
-<form action="" method="POST">
-	{{ form.hidden_tag() }}
-	{{ form.fullName.label }}
-	{{ form.fullName }}
-	{{ form.email.label }}
-    {{ form.email }}
-    {{ form.message.label }}
-	{{ form.message }}
-    
-	{{ form.submit }}
-</form>
-{{ role }}
-=======
--->
     <!-- Code block for intoduction section -->
     <div class="container-fluid gtco-banner-area">
         <div class="container">
@@ -267,8 +249,7 @@
     </footer>
 
     <!-- owl carousel js-->
-    <script src="owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-<!--
->>>>>>> 82558e6cb291c7d99e6a72df573b85bf13f739a2 -->
+    <script src="{{url_for('static', filename='owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{url_for('static', filename='js/main.js') }}"></script>
+
 {% endblock content %}

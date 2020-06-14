@@ -25,7 +25,7 @@
 </table>
 {% for page_num in accounts.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
 	{% if page_num %}
-		<a href="{{ url_for(view_accounts_status.html, page=page_num)}}"></a>	
+		<a href="{{ url_for('view_accounts_status', page=page_num)}}"></a>	
 	{% else %}
 	...		
 	{% endif %}

@@ -188,6 +188,7 @@ iframe {
   pointer-events: none;
 }
 
+<<<<<<< HEAD
 .wrap-login101{
     width: 550px;
   background: #fff;
@@ -201,6 +202,8 @@ iframe {
   -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
+=======
+>>>>>>> parent of e7bf8a2... Revert "Login html"
 .wrap-login100 {
   width: 390px;
   background: #fff;
@@ -214,9 +217,12 @@ iframe {
   -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<< HEAD
 .wrap-login101{
   overflow: auto;
 }
+=======
+>>>>>>> parent of e7bf8a2... Revert "Login html"
 
 /*==================================================================
 [ Form ]*/
@@ -224,6 +230,7 @@ iframe {
 .login100-form {
   width: 100%;
 }
+<<<<<<< HEAD
  
 .login101-form{
   width: fit-content;
@@ -235,6 +242,8 @@ iframe {
   flex-wrap: wrap;
   justify-content: center;
 }
+=======
+>>>>>>> parent of e7bf8a2... Revert "Login html"
 
 .login100-form-title {
   display: block;
@@ -253,7 +262,10 @@ iframe {
   position: relative;
   background-color: #fff;
   border-radius: 20px;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of e7bf8a2... Revert "Login html"
 }
 
 .input100 {
@@ -269,6 +281,7 @@ iframe {
   padding: 0 20px 0 23px;
 }
 
+<<<<<<< HEAD
 .label-input100 {
   font-family: Poppins-Regular;
   font-size: 15px;
@@ -282,6 +295,8 @@ iframe {
   width: 80px;
 
 }
+=======
+>>>>>>> parent of e7bf8a2... Revert "Login html"
 
 /*------------------------------------------------------------------
 [ Focus Input ]*/

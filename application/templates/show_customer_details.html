@@ -40,6 +40,13 @@
 		</form>
 	{% elif update %}
 		<div>do you want to update this customer??</div>
+		<form action="", method="POST">
+			{{ form.confirm.label }}
+			{{ form.confirm }}
+			{{ form.cust_id.label }}
+			{{ form.cust_id }}
+			{{ form.submit }}
+		</form>
 	{% endif %}
 {% endif %}
 {% endblock content %}

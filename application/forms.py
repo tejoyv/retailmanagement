@@ -29,7 +29,7 @@ class LoginForm(FlaskForm):
 		if password.data.isalpha():
 			raise ValidationError("Password should contain atleast 1 special character!!!")
 
-class CreateCustomerForm(FlaskForm):
+class CustomerDetailsForm(FlaskForm):
 	ssn_id = IntegerField("Customer SSN Id",validators=[DataRequired()]) 
 	cust_id = IntegerField("Customer ID",validators=[DataRequired()])
 	cust_name = StringField("Customer Name",validators=[DataRequired(),Length(max=30)])
@@ -70,6 +70,6 @@ class SearchUserForm(FlaskForm):
 			raise ValidationError("SSN Id should be not more than 9 digit numeric.")
 
 class ConfirmationForm(FlaskForm):
-	confirm = BooleanField("Are you sure??", default=True, validators=[])
+	confirm = BooleanField("Are you sure??")
 	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", validators=[])
 	submit = SubmitField("Confirm")

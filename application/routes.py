@@ -1,5 +1,5 @@
 from application import app, db, bcrypt, mail
-from application.forms import LoginForm, CreateCustomerForm, ContactForm, SearchUserForm, ConfirmationForm
+from application.forms import LoginForm, CustomerDetailsForm, ContactForm, SearchUserForm, ConfirmationForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
@@ -47,7 +47,7 @@ def create_customer():
 	if session.get('ROLE') != "acc_exec":
 		return "Action Not Allowed"
 	else:
-	    form = CreateCustomerForm()
+	    form = CustomerDetailsForm()
 	    if form.validate_on_submit():
 	        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data,
 	                           cust_address=form.address.data,cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
@@ -60,20 +60,32 @@ def create_customer():
 #============================================Misc Functions=======================================#
 def show_customer_details(customer, delete=False, update=False):
 	form_conf = ConfirmationForm()
-	
 	if update:
 		if form_conf.validate_on_submit():
 			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
-				db.session.delete(customer)
-				db.session.commit()
-				flash("Account Updated!!!")
-				return redirect('home')
+				if session.get('ROLE') != "acc_exec":
+					return "Action Not Allowed"
+				else:
+					form = CustomerDetailsForm()
+					if form.validate_on_submit():
+						customer.cust_name = form.cust_name.data
+						customer.cust_address=form.address.data
+						customer.cust_contact = form.contact.data
+						customer.cust_age = form.cust_age.data
+						customer.cust_state = form.state.data
+						customer.cust_city = form.city.data
+						db.session.commit()
+						flash("Customer Details Updated")
+						return redirect('home')
+					return render_template('update_customer_details.html', form=form, title="Update Customer Details")
+
 	elif delete:
 		if form_conf.validate_on_submit():
+			print(form_conf.confirm.data)
 			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
 				db.session.delete(customer)
 				db.session.commit()
-				flash("Account Deleted!!!")
+				flash("Customer Deleted!!!")
 				return redirect('home')
 	return render_template('show_customer_details.html', customer=customer, delete=delete, update=update, title="Show Customer Details", form=form_conf)
 
@@ -96,7 +108,7 @@ def delete_customer():
 			return render_template('delete_customer.html', form=form, title="Delete Customer")
 
 
-#============================================Delete Customer=======================================#
+#============================================Update Customer=======================================#
 @app.route("/update_customer", methods=['GET', 'POST'])
 def update_customer():
 	if session.get('ROLE') != "acc_exec":

@@ -1,12 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField,IntegerField,TextField,SelectField,TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, TextField, SelectField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError,Email
 from application.models import User,Customer
 
 class LoginForm(FlaskForm):
 	username = StringField("Username", validators=[DataRequired(), Length(min=8)],render_kw={"placeholder": "Username"})
 	password = PasswordField("Password", validators=[DataRequired()],render_kw={"placeholder": "Password"})
-	
 	submit = SubmitField("Login")
 
 	def validate_password(self, password):
@@ -64,10 +63,13 @@ class ContactForm(FlaskForm):
 class SearchUserForm(FlaskForm):
 	ssn_id = IntegerField("Customer SSN Id", default=0, validators=[]) 
 	cust_id = IntegerField("Customer ID", default=0, validators=[])
-	
 	submit = SubmitField("Submit")
 	
 	def validate_ssnid(self,ssn_id):
 		if ssn_id.data>999999999:
 			raise ValidationError("SSN Id should be not more than 9 digit numeric.")
 
+class ConfirmationForm(FlaskForm):
+	confirm = BooleanField("Are you sure??", default=True, validators=[])
+	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", validators=[])
+	submit = SubmitField("Confirm")

@@ -2,14 +2,14 @@ from application import db,mail
 from application.models import Customer, Account, Transaction
 from flask_mail import Message
 
-def searchCustomer(ssn=None, cust_id=None):
-	if ssn != None:
+def searchCustomer(ssn=0, cust_id=0):
+	if ssn != 0:
 		customer = Customer.query.filter_by(ssn=ssn).first()
 		if customer:
 			return customer
 		else:
 			return None
-	elif cust_id != None:
+	elif cust_id != 0:
 		customer = Customer.query.filter_by(cust_id=cust_id).first()
 		if customer:	
 			return customer

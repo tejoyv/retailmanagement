@@ -6,8 +6,8 @@ from flask_mail import Message
 from application.utils import mail_send, searchCustomer, searchAccount
 
 @app.route("/",methods=["GET","POST"])
+@app.route("/home",methods=["GET","POST"])
 def home():
-	form = ContactForm()
 	if request.method == "POST":
 		print("hello")
 		fullname = request.form.get('fullname')
@@ -17,7 +17,7 @@ def home():
 		value = mail_send(fullname,email,message)
 		return value
 	else:
-		return render_template("home.html", title="Moody Bank", role=session.get('ROLE'), form=form)
+		return render_template("home.html",title="Moody Bank",role=session.get('ROLE'))
 
 
 @app.route("/login", methods=['GET', 'POST'])

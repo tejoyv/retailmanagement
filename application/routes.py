@@ -185,7 +185,7 @@ def create_account():
 	        return redirect("/create_account")
 	    return render_template("create_account.html",form=form, title="Create Customer")
 
-#============================================Create New Account=======================================#
+#============================================Delete Account=======================================#
 @app.route("/delete_account",methods=["GET","POST"])
 def delete_account():
 	form = SearchAccountForm()
@@ -196,6 +196,18 @@ def delete_account():
 		else:
 			return show_account_details(account, delete=True)
 	return render_template('delete_account.html', form=form, title="Delete Account")
+
+#============================================Search Account=======================================#
+@app.route("/search_account",methods=["GET","POST"])
+def search_account():
+	form = SearchAccountForm()
+	if form.validate_on_submit():
+		account = searchAccount(acc_no=form.acc_no.data, cust_id=form.cust_id.data, acc_type=form.acc_type.data)
+		if account == None:
+			return "Account not found!!!"
+		else:
+			return show_account_details(account)
+	return render_template('search_account.html', form=form, title="Search Account")
 
 
 

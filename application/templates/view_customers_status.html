@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h2>Total Customers in the Bank - {{ customers.total }}</h2>
+
+<table>
+	<tr>
+		<th>SSN ID</th>
+		<th>Customer ID</th>
+		<th>Customer Name</th>
+		<th>Customer Contact Number</th>
+		<th>Last Updated</th>
+	</tr>
+	{% for customer in customers.items %}
+	<tr>
+		<td>{{ customer.ssn }}</td>
+		<td>{{ customer.cust_id }}</td>
+		<td>{{ customer.cust_name }}</td>
+		<td>{{ customer.cust_contact }}</td>
+		<td>{{ customer.transactions[-1].transaction_date }}</td>
+	</tr>
+	{% endfor%}
+</table>
+{% for page_num in customers.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
+	{% if page_num %}
+		<a href="{{ url_for('view_customers_status', page=page_num)}}">{{ page_num }}</a>	
+	{% else %}
+	...		
+	{% endif %}
+{% endfor %}
+
+{% endblock content %}

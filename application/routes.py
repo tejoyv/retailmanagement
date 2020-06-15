@@ -7,16 +7,6 @@ from application.utils import mail_send, searchCustomer, searchAccount
 
 @app.route("/",methods=["GET","POST"])
 def home():
-	'''<<<<<<< HEAD
-	msg=""
-	form = ContactForm()
-	if form.validate_on_submit():	
-		msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=["tejoyv@gmail.com"])
-		msg.body = "Hello Flask message sent from Flask-Mail"
-		mail.send(msg)
-		return "Sent"
-	return render_template("home.html",title="Home", form=form, role=session.get('ROLE'))
-	======='''
 	form = ContactForm()
 	if request.method == "POST":
 		print("hello")
@@ -28,7 +18,6 @@ def home():
 		return value
 	else:
 		return render_template("home.html", title="Moody Bank", role=session.get('ROLE'), form=form)
-	#>>>>>>> 82558e6cb291c7d99e6a72df573b85bf13f739a2
 
 
 @app.route("/login", methods=['GET', 'POST'])

@@ -6,7 +6,8 @@ from flask_mail import Message
 from application.utils import mail_send
 
 @app.route("/",methods=["GET","POST"])
-def home():
+@app.route("/index",methods=["GET","POST"])
+def index():
 	if request.method == "POST":
 		print("hello")
 		fullname = request.form.get('fullname')
@@ -16,7 +17,7 @@ def home():
 		value = mail_send(fullname,email,message)
 		return value
 	else:
-		return render_template("home.html",title="Moody Bank",role=session.get('ROLE'))
+		return render_template("index.html",title="Moody Bank",role=session.get('ROLE'))
 
 
 @app.route("/login", methods=['GET', 'POST'])

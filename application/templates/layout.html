@@ -33,14 +33,14 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('create_customer') }}">Create Customer</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('delete_customer') }}">Delete Customer</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('delete_customer') }}">Update Customer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('update_customer') }}">Update Customer</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('view_customers_status') }}">View All Customers</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('search_customer') }}">Search Customer</a></li>
                     <!-- Account related Operations -->
 
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('view_accounts_status') }}">View All Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Create Customer Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Delete Customer Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create_account') }}">Create Customer Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('delete_account') }}">Delete Customer Accounts</a></li>
 
                 </ul>
                 {% elif session.get('ROLE') == "teller" %}
@@ -48,7 +48,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
 
                     <!-- Account related Operations -->
-                    <li class="nav-item"><a class="nav-link" href="#">Search Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_account') }}">Search Account</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Deposite Money</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Withdraw Money</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Transfer Money</a></li>

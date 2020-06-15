@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<-- Dummy Form for testing... -->
+<form action="" method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.acc_no.label }}
+    {{ form.acc_no }}
+    {{ form.acc_balance.label }}
+	{{ form.acc_balance }}
+	{{ form.acc_type.label }}
+    {{ form.acc_type }}
+    {{ form.cust_id.label }}
+    {{ form.cust_id }}
+	{{ form.submit }}
+</form>
+{% endblock content %}

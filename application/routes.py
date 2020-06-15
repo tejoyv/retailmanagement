@@ -62,15 +62,19 @@ def show_customer_details(customer, delete=False, update=False):
 	form_conf = ConfirmationForm()
 	
 	if update:
-		return redirect('update_form')
+		if form_conf.validate_on_submit():
+			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
+				db.session.delete(customer)
+				db.session.commit()
+				flash("Account Updated!!!")
+				return redirect('home')
 	elif delete:
 		if form_conf.validate_on_submit():
 			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
 				db.session.delete(customer)
 				db.session.commit()
-				return "Account Deleted!!!"
-			else:
-				return redirect(url_for('home'))
+				flash("Account Deleted!!!")
+				return redirect('home')
 	return render_template('show_customer_details.html', customer=customer, delete=delete, update=update, title="Show Customer Details", form=form_conf)
 
 

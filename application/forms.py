@@ -70,6 +70,6 @@ class SearchUserForm(FlaskForm):
 			raise ValidationError("SSN Id should be not more than 9 digit numeric.")
 
 class ConfirmationForm(FlaskForm):
-	confirm = BooleanField("Are you sure??", validators=[])
+	confirm = BooleanField("Are you sure??", default=True, validators=[])
 	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", validators=[])
 	submit = SubmitField("Confirm")

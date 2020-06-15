@@ -1,17 +1,29 @@
 {% extends 'layout.html' %}
 {% block content %}
-<-- Dummy Form for testing... -->
-<form action="" method="POST">
+<br/>
+<br/>
+<footer class="container-fluid" id="gtco-footer">
+	<form action="" method="POST" novalidate>
 	{{ form.hidden_tag() }}
-	{{ form.username.label }}
-	{{ form.username }}
-	{{ form.password.label }}
-	{{ form.password }}
-	{{ form.submit }}
-	<div>
-		{% for error in form.password.errors %}
-			<span>{{ error }}</span>
-		{% endfor %}
-	</div>
-</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6" id="contact">
+				<br />
+				<h2 style="color:#1d3ede;margin-left: 140px;">
+					<centre>Login Form </centre>
+				</h2><br/>
+				{{ form.username(class="form-control") }}<br/>
+				{{ form.password(class="form-control") }}<br/>
+				{{ form.submit(class="submit-button") }}<br/>
+
+				<div>
+					{% for error in form.password.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+
+			</div>
+			</form>
+</footer>
+
 {% endblock content %}

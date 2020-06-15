@@ -4,9 +4,9 @@ from wtforms.validators import DataRequired, Length, ValidationError,Email
 from application.models import User,Customer
 
 class LoginForm(FlaskForm):
-	username = StringField("Username", validators=[DataRequired(), Length(min=8)])
-	password = PasswordField("Password", validators=[DataRequired()])
-	submit = SubmitField("Submit")
+	username = StringField("Username", validators=[DataRequired(), Length(min=8)],render_kw={"placeholder": "Username"})
+	password = PasswordField("Password", validators=[DataRequired()],render_kw={"placeholder": "Password"})
+	submit = SubmitField("Login")
 
 	def validate_password(self, password):
 		if len(password.data) != 10:

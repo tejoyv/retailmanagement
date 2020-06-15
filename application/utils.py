@@ -19,13 +19,13 @@ def searchCustomer(ssn=0, cust_id=0):
 		return None
 
 def searchAccount(acc_no=None, cust_id=None, acc_type='S'):
-	if acc_no != None:
+	if acc_no != 0:
 		account = Account.query.filter_by(acc_no=acc_no).first()
 		if account:
 			return account
 		else:
 			return None
-	elif cust_id != None:
+	elif cust_id != 0:
 		customer = Customer.query.filter_by(cust_id=cust_id).first()
 		if customer:
 			for account in customer.accounts:

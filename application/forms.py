@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, TextField, SelectField, TextAreaField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, TextField, SelectField, TextAreaField, BooleanField, FloatField
 from wtforms.validators import DataRequired, Length, ValidationError,Email
-from application.models import User,Customer
+from application.models import User, Customer, Account
 
 class LoginForm(FlaskForm):
 	username = StringField("Username", validators=[DataRequired(), Length(min=8)],render_kw={"placeholder": "Username"})
@@ -69,7 +69,35 @@ class SearchUserForm(FlaskForm):
 		if ssn_id.data>999999999:
 			raise ValidationError("SSN Id should be not more than 9 digit numeric.")
 
-class ConfirmationForm(FlaskForm):
+class UserConfirmationForm(FlaskForm):
 	confirm = BooleanField("Are you sure??")
 	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", validators=[])
+	submit = SubmitField("Confirm")
+
+class AccountDetailsForm(FlaskForm):
+	acc_no = IntegerField("Account Number", default=Account.generate_acc_no(), validators=[DataRequired()]) 
+	acc_balance = FloatField("Account Balance", default=1000, validators=[DataRequired()])
+	acc_type = SelectField("Account Type", validators=[DataRequired()], choices=[('S', "Savings"),('C', "Current")])
+	cust_id = IntegerField("Customer ID",validators=[DataRequired()])
+	submit = SubmitField("Create Account")
+	
+	def validate_balance(self,balance):
+		if balance < 100:
+			raise ValidationError("The minimum balance to open a new account is Rs. 1000")
+
+
+	def validate_cust_id(self,cust_id):
+		customer = Customer.query.filter_by(cust_id=cust_id)
+		if not customer:
+			raise ValidationError("Enter a valid customer ID.")
+
+class SearchAccountForm(FlaskForm):
+	acc_no = IntegerField("Account Number", default=0, validators=[])
+	cust_id = IntegerField("Customer ID", default=0, validators=[])
+	acc_type = SelectField("Account Type", validators=[], choices=[('S', "Savings"),('C', "Current")])
+	submit = SubmitField("Submit")
+
+class AccountConfirmationForm(FlaskForm):
+	confirm = BooleanField("Are you sure??")
+	acc_no = IntegerField("Enter the Account No. again to confirm!!!", validators=[])
 	submit = SubmitField("Confirm")

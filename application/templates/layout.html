@@ -39,8 +39,8 @@
                     <!-- Account related Operations -->
 
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('view_accounts_status') }}">View All Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Create Customer Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Delete Customer Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create_account') }}">Create Customer Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('delete_account') }}">Delete Customer Accounts</a></li>
 
                 </ul>
                 {% elif session.get('ROLE') == "teller" %}

@@ -52,13 +52,16 @@ def depositMoney(depositAmount, acc_no=None, cust_id=None, acc_type='S'):
 def withdrawMoney(withdrawAmount, acc_no=None, cust_id=None, acc_type='S'):
 	account = searchAccount(acc_no=acc_no, cust_id=cust_id, acc_type=acc_type)
 	if account != None:
-		account.acc_balance += withdrawAmount
-		db.session.commit()
-		num_transactions = len(Transaction.query.all())
-		transaction = Transaction(transaction_id=num_transactions+1, transaction_amount=withdrawAmount, from_acc=acc_type, to_acc=acc_type, action="Withdraw", cust_id=account.cust_id)
-		db.session.add(transaction)
-		db.session.commit()
-		return "Success"
+		if account.acc_balance - withdrawAmount < 1000:
+			return "Failure"
+		else:
+			account.acc_balance -= withdrawAmount
+			db.session.commit()
+			num_transactions = len(Transaction.query.all())
+			transaction = Transaction(transaction_id=num_transactions+1, transaction_amount=withdrawAmount, from_acc=acc_type, to_acc=acc_type, action="Withdraw", cust_id=account.cust_id)
+			db.session.add(transaction)
+			db.session.commit()
+			return "Success"
 	else:
 		return "Failure"
 

@@ -1,5 +1,5 @@
 from application import app, db, bcrypt, mail
-from application.forms import LoginForm, CreateCustomerForm, ContactForm, SearchUserForm
+from application.forms import LoginForm, CreateCustomerForm, ContactForm, SearchUserForm, ConfirmationForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
@@ -54,11 +54,24 @@ def create_customer():
 	        db.session.add(customer)
 	        db.session.commit()
 	        return redirect("/create_customer")
-	    return render_template("create_customer.html",form=form)
+	    return render_template("create_customer.html",form=form, title="Create Customer")
+
+
 #============================================Misc Functions=======================================#
 def show_customer_details(customer, delete=False, update=False):
-	return render_template('show_customer_details.html', customer=customer, delete=delete, update=update)
-
+	form_conf = ConfirmationForm()
+	
+	if update:
+		return redirect('update_form')
+	elif delete:
+		if form_conf.validate_on_submit():
+			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
+				db.session.delete(customer)
+				db.session.commit()
+				return "Account Deleted!!!"
+			else:
+				return redirect(url_for('home'))
+	return render_template('show_customer_details.html', customer=customer, delete=delete, update=update, title="Show Customer Details", form=form_conf)
 
 
 
@@ -76,7 +89,7 @@ def delete_customer():
 			else:
 				return show_customer_details(customer, delete=True, update=False)
 		else:
-			return render_template('delete_customer.html', form=form)
+			return render_template('delete_customer.html', form=form, title="Delete Customer")
 
 
 #============================================Delete Customer=======================================#
@@ -93,7 +106,7 @@ def update_customer():
 			else:
 				return show_customer_details(customer, delete=False, update=True)
 		else:
-			return render_template('update_customer.html', form=form)
+			return render_template('update_customer.html', form=form, title="Update Customer")
 
 #============================================Search Customer=======================================#
 @app.route('/search_customer', methods=['GET', 'POST'])
@@ -109,7 +122,7 @@ def search_customer():
 			else:
 				return show_customer_details(customer, delete=False, update=False)
 		else:
-			return render_template('search_customer.html', form=form)
+			return render_template('search_customer.html', form=form, title="Search Customer")
 
 @app.route("/view_customers_status", methods=['GET', 'POST'])
 def view_customers_status():
@@ -118,7 +131,7 @@ def view_customers_status():
 	else:
 		page = request.args.get('page', 1, type=int)
 		customers = Customer.query.order_by(Customer.cust_id).paginate(page=page, per_page=10)
-		return render_template("view_customers_status.html", customers=customers)
+		return render_template("view_customers_status.html", customers=customers, title="View All Customer")
 
 
 @app.route("/view_accounts_status", methods=['GET', 'POST'])
@@ -128,7 +141,7 @@ def view_accounts_status():
 	else:
 		page = request.args.get('page', 1, type=int)
 		accounts = Account.query.order_by(Account.acc_no).paginate(page=page, per_page=10)
-		return render_template("view_accounts_status.html", accounts=accounts)
+		return render_template("view_accounts_status.html", accounts=accounts, title="View All Accounts")
 
 
 @app.route("/logout", methods=['GET', 'POST'])

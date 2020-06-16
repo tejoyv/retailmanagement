@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block content %}
+<-- Dummy Form for testing... -->
+{% if not customer %}
+	<form action="" method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.ssn_id.label }}
+		{{ form.ssn_id }}
+		{{ form.cust_id.label }}
+		{{ form.cust_id }}
+		{{ form.submit }}
+		<div>
+			{% for error in form.ssn_id.errors %}
+				<span>ssn error - {{ error }}</span>
+			{% endfor %}
+		</div>
+		<div>
+			{% for error in form.cust_id.errors %}
+				<span>cust id error - {{ error }}</span>
+			{% endfor %}
+		</div>
+	</form>
+
+{% else %}
+	
+		{{ customer.ssn }}
+		{{ customer.cust_id }}
+		{{ customer.cust_name }}
+		{{ customer.cust_age }}
+		{{ customer.cust_state }}
+		{{ customer.cust_city }}
+	{% if delete %}
+		<div>Do you want to delete this customer??</div>
+		<form action="", method="POST">
+			{{ form.hidden_tag() }}
+			{{ form.confirm.label }}
+			{{ form.confirm }}
+			{{ form.cust_id.label }}
+			{{ form.cust_id }}
+			{{ form.submit }}
+		</form>
+	{% elif update %}
+		<div>do you want to update this customer??</div>
+		<form action="", method="POST">
+			{{ form.hidden_tag() }}
+			{{ form.confirm.label }}
+			{{ form.confirm }}
+			{{ form.cust_id.label }}
+			{{ form.cust_id }}
+			{{ form.submit }}
+		</form>
+	{% endif %}
+{% endif %}
+{% endblock content %}

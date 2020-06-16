@@ -32,6 +32,12 @@ class Account(db.Model):
 	acc_createDate = db.Column(db.DateTime, nullable=False, default=d.today())
 	cust_id = db.Column(db.Integer, db.ForeignKey('customer.cust_id'), nullable=False)
 	
+	@staticmethod
+	def generate_acc_no():
+		first_acc_no = Account.query.first().acc_no
+		tot_accounts = len(Account.query.all())
+		return (first_acc_no + tot_accounts + 2)
+
 	def __repr__(self):
 		return f"Account('{self.acc_no}', '{self.acc_type}', '{self.acc_balance}', '{self.acc_createDate}')"
 

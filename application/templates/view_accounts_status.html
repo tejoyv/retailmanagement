@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h2>Total Accounts in the Bank - {{ accounts.total }}</h2>
+
+<!-- Table for Account -->
+
+<table class="table table-hover">
+	<thead>
+		<tr class="table-primary">
+			<th scope="col">Customer ID</th>
+			<th scope="col">Account ID</th>
+			<th scope="col">Account Type</th>
+			<th scope="col">Account Creation Date</th>
+			<th scope="col">Account Balance</th>
+			<th scope="col">Account Last Updated</th>
+		</tr>
+	</thead>
+	{% for account in accounts.items %}
+	<tr>
+		<th scope="row">{{ account.cust_id }}</th>
+		<td>{{ account.acc_no }}</td>
+		<td>{{ account.acc_type }}</td>
+		<td>{{ account.acc_createDate }}</td>
+		<td>{{ account.acc_balance }}</td>
+		<td>{{ account.Owner.transactions[-1].transaction_date }}</td>
+	</tr>
+	{% endfor%}
+</table>
+
+<!-- Page Numbers -->
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+{% for page_num in accounts.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
+	{% if page_num %}
+
+		<li class="page-item"><a class="page-link"href="{{ url_for('view_accounts_status', page=page_num)}}">{{page_num}}</a></li>	
+
+	{% else %}
+	...		
+	{% endif %}
+{% endfor %}
+</ul>
+</nav>
+
+
+{% endblock content %}

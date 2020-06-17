@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<-- Dummy Form for testing... -->
+<form action="" method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.ssn_id.label }}
+    {{ customer.ssn_id }}
+    {{ form.cust_id.label }}
+	{{ customer.cust_id }}
+	{{ form.cust_name.label }} (OLD)
+    {{ customer.cust_name }}
+    {{ form.cust_name.label }} (NEW)
+    {{ form.cust_name }}
+    {{ form.cust_age.label }} (OLD)
+    {{ customer.cust_age }}
+    {{ form.cust_age.label }} (NEW)
+    {{ form.cust_age }}
+    {{ form.address.label }} (OLD)
+    {{ customer.address }}
+    {{ form.address.label }} (NEW)
+    {{ form.address }}
+    {{ form.contact.label }} (OLD)
+    {{ customer.contact }}
+    {{ form.contact.label }} (NEW)
+    {{ form.contact }}
+	{{ form.submit }}
+	
+</form>
+{% endblock content %}

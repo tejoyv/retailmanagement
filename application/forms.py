@@ -60,7 +60,7 @@ class ContactForm(FlaskForm):
 	message = TextAreaField('Message',validators=[DataRequired()])
 	submit = SubmitField('Send')
 
-class SearchUserForm(FlaskForm):
+class SearchCustomerForm(FlaskForm):
 	ssn_id = IntegerField("Customer SSN Id", default=0, validators=[]) 
 	cust_id = IntegerField("Customer ID", default=0, validators=[])
 	submit = SubmitField("Submit")
@@ -69,9 +69,9 @@ class SearchUserForm(FlaskForm):
 		if ssn_id.data>999999999:
 			raise ValidationError("SSN Id should be not more than 9 digit numeric.")
 
-class UserConfirmationForm(FlaskForm):
+class CustomerConfirmationForm(FlaskForm):
 	confirm = BooleanField("Are you sure??")
-	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", validators=[])
+	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", default=0, validators=[])
 	submit = SubmitField("Confirm")
 
 class AccountDetailsForm(FlaskForm):

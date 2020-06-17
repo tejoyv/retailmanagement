@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+		<div>Do you want to update this account??</div>
+		<form action="", method="POST">
+			{{ form.hidden_tag() }}
+			{{ form.confirm.label }}
+			{{ form.confirm }}
+			{{ form.cust_id.label }}
+			{{ form.cust_id }}
+			{{ form.submit }}
+		</form>
+{% endblock content %}

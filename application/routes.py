@@ -66,7 +66,7 @@ def show_account_details(account, delete=False):
 			if form_conf.confirm.data == True and form_conf.acc_no.data == account.acc_no:
 				db.session.delete(account)
 				db.session.commit()
-				flash("Customer Deleted!!!")
+				flash("Customer Deleted!!!", category="success")
 				return redirect('home')
 	return render_template('show_account_details.html', account=account, delete=delete, title="Show Account Details", form=form_conf)
 
@@ -76,7 +76,9 @@ def show_account_details(account, delete=False):
 def delete_customer(cust_id):
 	customer = Customer.query.filter_by(cust_id=cust_id).first()
 	form = CustomerConfirmationForm()
+	print("validation", form.validate_on_submit())
 	if form.validate_on_submit():
+		form.confirm.data and form.cust_id.data == cust_id
 		if form.confirm.data and form.cust_id.data == cust_id:
 			for account in customer.accounts:
 				db.session.delete(account)
@@ -86,10 +88,11 @@ def delete_customer(cust_id):
 				db.session.commit()
 			db.session.delete(customer)
 			db.session.commit()
-			flash("Customer Successfully Deleted!!!")
+			flash("Customer Successfully Deleted!!!", category="success")
 			return redirect(url_for('home'))
-		else:
-			flash("Wrong input data!!!")
+			print(not form.confirm.data) or (form.cust_id.data != cust_id)
+		elif (not form.confirm.data) or (form.cust_id.data != cust_id):
+			flash("Wrong input data!!!", category="danger")
 			return redirect(url_for('home'))
 	return render_template('delete_confirmation_form.html', title="Confirm Delete", form=form)
 
@@ -106,7 +109,7 @@ def update_customer_details(cust_id):
 		customer.contact = form.contact.data
 		customer.cust_age = form.cust_age.data
 		db.session.commit()
-		flash("Customer Details are updated!!!")
+		flash("Customer Details are updated!!!", category="success")
 		return redirect(url_for('home'))
 	return render_template('update_customer_details.html', title="Update Details", form=form, customer=customer)
 
@@ -119,7 +122,7 @@ def update_customer(cust_id):
 		if form.confirm.data and form.cust_id.data == cust_id:
 			return redirect(url_for('update_customer_details', cust_id=cust_id))
 		else:
-			flash("Wrong input data!!!")
+			flash("Wrong input data!!!", category="danger")
 			return redirect(url_for('home'))
 	return render_template('update_confirmation_form.html', title="Confirm Delete", form=form)
 
@@ -133,7 +136,8 @@ def search_customer():
 		if form.validate_on_submit():
 			customer = searchCustomer(ssn=form.ssn_id.data, cust_id=form.cust_id.data)
 			if customer == None:
-				return "Customer not found..."
+				flash("Customer not found...", category="danger")
+				return redirect(url_for('home'))
 			else:
 				return render_template('show_customer_details.html', customer=customer, title="Show Customer Details")
 		else:

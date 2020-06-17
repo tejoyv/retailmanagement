@@ -71,7 +71,7 @@ class SearchCustomerForm(FlaskForm):
 
 class CustomerConfirmationForm(FlaskForm):
 	confirm = BooleanField("Are you sure??")
-	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", validators=[DataRequired()])
+	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", default=0, validators=[])
 	submit = SubmitField("Confirm")
 
 class AccountDetailsForm(FlaskForm):

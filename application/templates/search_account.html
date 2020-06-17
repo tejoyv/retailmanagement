@@ -1,98 +1,62 @@
 {% extends "layout.html" %}
 {% block content%}
-    <!-- code block for account details form  -->
-    <footer class="container-fluid" id="gtco-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6" id="transfer">
-                    <br />
-                    <div class="form-group required"
-                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
-                        <h3 style="color:#1d3ede; margin:20px;"><b>Account details</b></h3>
-                        <hr />
-                        <form>
-
-                            <table style="text-align: centre;">
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Account ID:</label></h5>
-                                    </td>
-                                    <td><input type="number" name="acc_id" class="form-control" placeholder=" "
-                                            required></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <p>OR</p>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Customer ID:</label></h5>
-                                    </td>
-                                    <td><input type="number" name="cust_id" placeholder="" class="form-control"
-                                            required></td>
-                                </tr>
-                            </table>
-
-
-                            <br />
-
-                            </table>
-                            <br />
-
-                            <button type="button" data-toggle="collapse" data-target="#demo5" class="btn btn-info"
-                                style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">SEARCH</button>
-
-                            <!-- code block activated when search button is selected -->
-                            <div id="demo5" class="collapse">
-                                <br />
-                                <table>
-                                    <!-- code block to display fetched account details -->
-                                    <tr>
-                                    <tr>
-                                        <p>-------------details of account------------</p>
-                                    </tr>
-                                    <td><button type="button" class="btn btn-info"
-                                            style="width:150px; margin:0px 20px;height:50px; border-radius:50px;">TRANSFER</button>
-                                    </td>
-                                    <td><button type="button" class="btn btn-danger"
-                                            style="width:150px; margin:0px 50px;height:50px; border-radius:50px;">DEPOSIT</button>
-                                    </td>
-                                    <td><button type="button" class="btn btn-primary"
-                                            style="width:150px; margin:0px 50px;height:50px; border-radius:50px;">WITHDRAW</button>
-                                    </td>
-                                    </tr>
-                                </table>
+    <form class="pt-3" action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col align-self-center">
+                <fieldset class="form-group">
+                    <legend>Search Account</legend>
+                    <div class="form-group">
+                        {{ form.acc_no.label(class="form-control-label") }}
+                        {% if form.acc_no.errors %}
+                        {{ form.acc_no(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.acc_no.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
                             </div>
-                        </form>
+                        {% else %}
+                        {{ form.acc_no(class="form-control") }}
+                        {% endif %}
                     </div>
-
-                </div>
-
+                    <div class="row">
+                        <div class="col-5"></div>
+                        <div class="col-2">OR</div>
+                        <div class="col-5"></div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.cust_id.label(class="form-control-label") }}
+                        {% if form.cust_id.errors %}
+                        {{ form.cust_id(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.cust_id.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.cust_id(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.acc_type.label(class="form-control-label") }}
+                        {% if form.acc_type.errors %}
+                        {{ form.acc_type(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.acc_type.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.acc_type(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.submit(class="form-control btn-success") }}
+                    </div>
+                </fieldset>
             </div>
-            <hr />
-            <div class="col-8 text-center">
-                <br />
-                <br />
-                <hr />
-                <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span style="color: #1d3ede;">AVENGERS</span>.
-                </p>
-            </div>
+            <div class="col-4"></div>
         </div>
-        </div>
-    </footer>
-    </div>
-    </div>
-
-
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- owl carousel js-->
-    <script src="owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-
+    </form>
 {% endblock %}

@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- awesone fonts css-->
-    <link href="static/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/font-awesome.css') }}" rel="stylesheet" type="text/css">
     <!-- owl carousel css-->
-    <link rel="stylesheet" href="static/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='owl-carousel/assets/owl.carousel.min.css') }}" type="text/css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!-- custom CSS -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 	
 </head>
 <body>
@@ -32,8 +32,6 @@
 
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('create_customer') }}">Create Customer</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('delete_customer') }}">Delete Customer</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('update_customer') }}">Update Customer</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('view_customers_status') }}">View All Customers</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('search_customer') }}">Search Customer</a></li>
                     <!-- Account related Operations -->

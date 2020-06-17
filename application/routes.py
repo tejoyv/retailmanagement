@@ -1,5 +1,5 @@
 from application import app, db, bcrypt, mail
-from application.forms import LoginForm, CustomerDetailsForm, AccountDetailsForm, ContactForm, SearchUserForm, UserConfirmationForm, SearchAccountForm, AccountConfirmationForm
+from application.forms import LoginForm, CustomerDetailsForm, AccountDetailsForm, ContactForm, SearchCustomerForm, CustomerConfirmationForm, SearchAccountForm, AccountConfirmationForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
@@ -58,37 +58,6 @@ def create_customer():
 
 
 #============================================Misc Functions=======================================#
-def show_customer_details(customer, delete=False, update=False):
-	form_conf = UserConfirmationForm()
-	if update:
-		if form_conf.validate_on_submit():
-			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
-				if session.get('ROLE') != "acc_exec":
-					return "Action Not Allowed"
-				else:
-					form = CustomerDetailsForm()
-					if form.validate_on_submit():
-						customer.cust_name = form.cust_name.data
-						customer.cust_address=form.address.data
-						customer.cust_contact = form.contact.data
-						customer.cust_age = form.cust_age.data
-						customer.cust_state = form.state.data
-						customer.cust_city = form.city.data
-						db.session.commit()
-						flash("Customer Details Updated")
-						return redirect('home')
-					return render_template('update_customer_details.html', form=form, title="Update Customer Details")
-
-	elif delete:
-		if form_conf.validate_on_submit():
-			print(form_conf.confirm.data)
-			if form_conf.confirm.data == True and form_conf.cust_id.data == customer.cust_id:
-				db.session.delete(customer)
-				db.session.commit()
-				flash("Customer Deleted!!!")
-				return redirect('home')
-	return render_template('show_customer_details.html', customer=customer, delete=delete, update=update, title="Show Customer Details", form=form_conf)
-
 def show_account_details(account, delete=False):
 	form_conf = AccountConfirmationForm()
 	if delete:
@@ -103,36 +72,56 @@ def show_account_details(account, delete=False):
 
 
 #============================================Delete Customer=======================================#
-@app.route("/delete_customer", methods=['GET', 'POST'])
-def delete_customer():
-	if session.get('ROLE') != "acc_exec":
-		return "Action Not Allowed"
-	else:
-		form = SearchUserForm()
-		if form.validate_on_submit():
-			customer = searchCustomer(ssn=form.ssn_id.data, cust_id=form.cust_id.data)
-			if customer == None:
-				return "Customer not found..."
-			else:
-				return show_customer_details(customer, delete=True, update=False)
-	return render_template('delete_customer.html', form=form, title="Delete Customer")
+@app.route("/delete_customer/<int:cust_id>", methods=['GET', 'POST'])
+def delete_customer(cust_id):
+	customer = Customer.query.filter_by(cust_id=cust_id).first()
+	form = CustomerConfirmationForm()
+	if form.validate_on_submit():
+		if form.confirm.data and form.cust_id.data == cust_id:
+			for account in customer.accounts:
+				db.session.delete(account)
+				db.session.commit()
+			for transaction in customer.transactions:
+				db.session.delete(transaction)
+				db.session.commit()
+			db.session.delete(customer)
+			db.session.commit()
+			flash("Customer Successfully Deleted!!!")
+			return redirect(url_for('home'))
+		else:
+			flash("Wrong input data!!!")
+			return redirect(url_for('home'))
+	return render_template('delete_confirmation_form.html', title="Confirm Delete", form=form)
+
 
 
 #============================================Update Customer=======================================#
-@app.route("/update_customer", methods=['GET', 'POST'])
-def update_customer():
-	if session.get('ROLE') != "acc_exec":
-		return "Action Not Allowed"
-	else:
-		form = SearchUserForm()
-		if form.validate_on_submit():
-			customer = searchCustomer(ssn=form.ssn_id.data, cust_id=form.cust_id.data)
-			if customer == None:
-				return "Customer not found..."
-			else:
-				return show_customer_details(customer, delete=False, update=True)
+@app.route("/update_customer_details/<int:cust_id>", methods=['GET', 'POST'])
+def update_customer_details(cust_id):
+	customer = Customer.query.filter_by(cust_id=cust_id).first()
+	form = CustomerDetailsForm()
+	if form.validate_on_submit():
+		customer.cust_name = form.cust_name.data
+		customer.address = form.address.data
+		customer.contact = form.contact.data
+		customer.cust_age = form.cust_age.data
+		db.session.commit()
+		flash("Customer Details are updated!!!")
+		return redirect(url_for('home'))
+	return render_template('update_customer_details.html', title="Update Details", form=form, customer=customer)
+
+
+@app.route("/update_customer/<int:cust_id>", methods=['GET', 'POST'])
+def update_customer(cust_id):
+	customer = Customer.query.filter_by(cust_id=cust_id).first()
+	form = CustomerConfirmationForm()
+	if form.validate_on_submit():
+		if form.confirm.data and form.cust_id.data == cust_id:
+			return redirect(url_for('update_customer_details', cust_id=cust_id))
 		else:
-			return render_template('update_customer.html', form=form, title="Update Customer")
+			flash("Wrong input data!!!")
+			return redirect(url_for('home'))
+	return render_template('update_confirmation_form.html', title="Confirm Delete", form=form)
 
 #============================================Search Customer=======================================#
 @app.route('/search_customer', methods=['GET', 'POST'])
@@ -140,13 +129,13 @@ def search_customer():
 	if session.get('ROLE') != "acc_exec":
 		return "Action Not Allowed"
 	else:
-		form = SearchUserForm()
+		form = SearchCustomerForm()
 		if form.validate_on_submit():
 			customer = searchCustomer(ssn=form.ssn_id.data, cust_id=form.cust_id.data)
 			if customer == None:
 				return "Customer not found..."
 			else:
-				return show_customer_details(customer, delete=False, update=False)
+				return render_template('show_customer_details.html', customer=customer, title="Show Customer Details")
 		else:
 			return render_template('search_customer.html', form=form, title="Search Customer")
 
@@ -209,6 +198,8 @@ def search_account():
 			return show_account_details(account)
 	return render_template('search_account.html', form=form, title="Search Account")
 
+
+#============================================Deposite Money=======================================#
 
 
 @app.route("/logout", methods=['GET', 'POST'])

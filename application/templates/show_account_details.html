@@ -1,33 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
 <-- Dummy Form for testing... -->
-{% if not account %}
-	<form action="" method="POST">
-		{{ form.hidden_tag() }}
-		{{ form.acc_no.label }}
-		{{ form.acc_no }}
-		{{ form.cust_id.label }}
-		{{ form.cust_id }}
-		{{ form.acc_type.label }}
-		{{ form.acc_type }}
-		{{ form.submit }}
-		<div>
-			{% for error in form.acc_no.errors %}
-				<span>ssn error - {{ error }}</span>
-			{% endfor %}
-		</div>
-		<div>
-			{% for error in form.cust_id.errors %}
-				<span>cust id error - {{ error }}</span>
-			{% endfor %}
-		</div>
-	</form>
 
-{% else %}
 		{{ account.acc_no }}
 		{{ account.acc_balance }}
 		{{ account.acc_type }}
 		{{ account.acc_createDate }}
 		{{ account.cust_id }}
-{% endif %}
+
+		<a href="{{ url_for('delete_account', cust_id=account.acc_no) }}">Delete this account</a>
+
 {% endblock content %}

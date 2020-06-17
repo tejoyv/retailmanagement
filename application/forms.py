@@ -101,3 +101,22 @@ class AccountConfirmationForm(FlaskForm):
 	confirm = BooleanField("Are you sure??")
 	acc_no = IntegerField("Enter the Account No. again to confirm!!!", validators=[])
 	submit = SubmitField("Confirm")
+
+
+class DepositMoneyForm(FlaskForm):
+	depositAmount = FloatField("Deposit Amount", validators=[DataRequired()])
+	submit = SubmitField("Deposit")
+
+	def validate_depositAmount(self, depositAmount):
+		if depositAmount < 0:
+			raise ValidationError("Wrong Input!!!")
+
+class WithdrawMoneyForm(FlaskForm):
+	withdrawAmount = FloatField("Withdraw Amount", validators=[DataRequired()])
+	submit = SubmitField("Withdraw")
+
+class TransferMoneyForm(FlaskForm):
+	amount = FloatField("Amount", validators=[DataRequired()])
+	from_acc = SelectField("Account Type", validators=[DataRequired()], default='S', choices=[('S', "Savings"),('C', "Current")])
+	from_acc = SelectField("Account Type", validators=[DataRequired()], default='C', choices=[('S', "Savings"),('C', "Current")])
+	submit = SubmitField("Withdraw")

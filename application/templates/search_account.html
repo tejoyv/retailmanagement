@@ -10,15 +10,14 @@
                         style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
                         <h3 style="color:#1d3ede; margin:20px;"><b>Account details</b></h3>
                         <hr />
-                        <form>
+                        <form action="", method="POST">
 
                             <table style="text-align: centre;">
                                 <tr>
                                     <td>
-                                        <h5><label class="control-label">Account ID:</label></h5>
+                                        <h5><label class="control-label">{{ form.acc_no.label }}</label></h5>
                                     </td>
-                                    <td><input type="number" name="acc_id" class="form-control" placeholder=" "
-                                            required></td>
+                                    <td>{{ form.acc_no }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -29,10 +28,15 @@
 
                                 <tr>
                                     <td>
-                                        <h5><label class="control-label">Customer ID:</label></h5>
+                                        <h5><label class="control-label">{{ form.cust_id.label }}</label></h5>
                                     </td>
-                                    <td><input type="number" name="cust_id" placeholder="" class="form-control"
-                                            required></td>
+                                    <td>{{ form.cust_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5><label class="control-label">{{ form.acc_type.label }}</label></h5>
+                                    </td>
+                                    <td>{{ form.acc_type }}</td>
                                 </tr>
                             </table>
 
@@ -42,8 +46,7 @@
                             </table>
                             <br />
 
-                            <button type="button" data-toggle="collapse" data-target="#demo5" class="btn btn-info"
-                                style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">SEARCH</button>
+                            <button type="submit" data-toggle="collapse" data-target="#demo5" class="btn btn-info" style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">SEARCH</button>
 
                             <!-- code block activated when search button is selected -->
                             <div id="demo5" class="collapse">

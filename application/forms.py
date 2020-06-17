@@ -70,7 +70,7 @@ class SearchCustomerForm(FlaskForm):
 			raise ValidationError("SSN Id should be not more than 9 digit numeric.")
 
 class CustomerConfirmationForm(FlaskForm):
-	confirm = BooleanField("Are you sure??")
+	confirm = BooleanField("Yes")
 	cust_id = IntegerField("Enter the Customer ID again to confirm!!!", default=0, validators=[])
 	submit = SubmitField("Confirm")
 
@@ -98,7 +98,7 @@ class SearchAccountForm(FlaskForm):
 	submit = SubmitField("Submit")
 
 class AccountConfirmationForm(FlaskForm):
-	confirm = BooleanField("Are you sure??")
+	confirm = BooleanField("Yes")
 	acc_no = IntegerField("Enter the Account No. again to confirm!!!", validators=[])
 	submit = SubmitField("Confirm")
 
@@ -117,6 +117,6 @@ class WithdrawMoneyForm(FlaskForm):
 
 class TransferMoneyForm(FlaskForm):
 	amount = FloatField("Amount", validators=[DataRequired()])
-	from_acc = SelectField("Account Type", validators=[DataRequired()], default='S', choices=[('S', "Savings"),('C', "Current")])
-	from_acc = SelectField("Account Type", validators=[DataRequired()], default='C', choices=[('S', "Savings"),('C', "Current")])
-	submit = SubmitField("Withdraw")
+	from_acc = SelectField("From Account Type", validators=[DataRequired()], default='S', choices=[('S', "Savings"),('C', "Current")])
+	to_acc = SelectField("To Account Type", validators=[DataRequired()], default='C', choices=[('S', "Savings"),('C', "Current")])
+	submit = SubmitField("Transfer")

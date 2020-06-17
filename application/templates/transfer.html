@@ -1,109 +1,47 @@
-<!doctype html>
-
-<html lang="en">
-
-<{% extends "layout.html"%}
+{% extends "layout.html"%}
 {% block content%}
-<!-- code block for tansfer form  -->
-    <footer class="container-fluid" id="gtco-footer">
-        <div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col align-self-center">
             <div class="row">
-                <div class="col-lg-6" id="transfer">
-                    <br />
-                    <div class="form-group required"
-                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
-                        <h3 style="color:#1d3ede; margin:20px;"><b>Transfer Money</b></h3>
-                        <hr />
-
-                        <form>
-                            <table style="text-align: centre;">
-
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Source Account ID:</label></h5>
-                                    </td>
-                                    <td><input type="number" name="Src acc id" placeholder="" class="form-control"></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Target Account ID:</label></h5>
-                                    </td>
-                                    <td><input type="number" name="Target acc id" placeholder="" class="form-control">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Transfer Amount:</label></h5>
-                                    </td>
-                                    <td><input type="number" name="transfer_amt" placeholder="" class="form-control"
-                                            required></td>
-                                </tr>
-                            </table>
-                            <button type="button" data-toggle="collapse" data-target="#demo8" class="btn btn-info"
-                                style="width:200px; margin:0px 180px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">TRANSFER</button>
-                            <br />
-                            <br />
-                            <br />
-
-                            <!-- code block activated when transfer button is selected -->
-                            <div id="demo8" class="collapse" style="border-radius:10px;">
-                                <hr />
-                                <br />
-                                <table>
-                                    <table class="table table-bordered" style="background-color:white;color: black;">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th> ID </th>
-                                                <th>Before Balance</th>
-                                                <th>After Balance</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- data to be fetched from DB and updated values -->
-                                        <tbody>
-                                            <tr>
-                                                <th>Source ID</th>
-                                                <td><span> </span></td>
-                                                <td><span></span></td>
-                                                <td><span></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Target ID</th>
-                                                <td><span></span></td>
-                                                <td><span></span></td>
-                                                <td><span></span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br />
-                                </table>
-                            </div>
-                        </form>
+                <div class="col-6">Account Number :</div>
+                <div class="col-6">{{ account.acc_no }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Owner Name :</div>
+                <div class="col-6">{{ account.Owner.cust_name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">From Account :</div>
+                {% if account.acc_type == 'S'%}
+                <div class="col-6">Savings</div>
+                {% elif account.acc_type == 'C' %}
+                <div class="col-6">Current</div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-6">Account Balance :</div>
+                <div class="col-6">{{ account.acc_balance }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">To Account :</div>
+                <form action="" method="POST">
+                    <div>
+                        {{ form.from_acc.label }} : 
+                        {{ form.from_acc }}
                     </div>
-
-                </div>
-                <hr />
-                <div class="col-8 text-center">
-                    <br />
-                    <br />
-                    <hr />
-                    <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span
-                            style="color: #1d3ede;">AVENGERS</span>.</p>
-                </div>
+                    <div>
+                        {{ form.to_acc.label }} : 
+                        {{ form.to_acc }}
+                    </div>
+                    <div>
+                        {{ form.amount.label }} : 
+                        {{ form.amount }}
+                    </div>
+                    {{ form.submit(class="btn btn-success") }}
+                </form>
             </div>
         </div>
-    </footer>
+        <div class="col-3"></div>
     </div>
-    </div>
-
-
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- owl carousel js-->
-    <script src="owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-
 {% endblock %}

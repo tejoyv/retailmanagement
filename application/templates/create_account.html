@@ -1,76 +1,71 @@
 {% extends "layout.html" %}
 {% block content %}
-    <!-- code block for create account form section -->
-    <footer class="container-fluid" id="gtco-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6" id="create_account">
-                    <br />
-                    <div class="form-group required"
-                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
-                        <h3 style="color:#1d3ede; margin:20px;"><b>Create Account</b></h3>
-                        <form>
-                            <hr />
-                            <table style="text-align: centre;">
-                                <tr>
-                                    <td>
-                                        <h5>{{form.acc_no.label(class="control-label")}}</h5>
-                                    </td>
-                                    <td>{{form.acc_no(class="form-control")}}</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h5>{{form.cust_id.label(class="control-label")}}</h5>
-                                    </td>
-                                    <td>{{form.cust_id(class="form-control")}}</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h5>{{form.acc_type.label(class="control-label")}}</h5>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" style="margin: 20px 80px;">
-                                            {{form.acc_type}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <br />
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Deposit Amount:</label></h5>
-                                    </td>
-                                    <td><input type="number" class="form-control" placeholder="" name="deposit"
-                                            required></td>
-                                </tr>
-                            </table>
-                            <br />
-
-                            <button type="button" class="btn btn-info"
-                                style="width:200px; margin:0px 220px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">CREATE
-                                ACCOUNT</button>
-                        </form>
+    <form class="pt-3" action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col align-self-center">
+                <fieldset class="form-group">
+                    <legend>Create Customer</legend>
+                    <div class="form-group">
+                        {{ form.acc_no.label(class="form-control-label") }}
+                        {% if form.acc_no.errors %}
+                        {{ form.acc_no(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.acc_no.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.acc_no(class="form-control") }}
+                        {% endif %}
                     </div>
-                </div>
-                <hr />
-                <div class="col-8 text-center">
-                    <br />
-                    <br />
-                    <hr />
-                    <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span
-                            style="color: #1d3ede;">AVENGERS</span>.</p>
-                </div>
+                    <div class="form-group">
+                        {{ form.cust_id.label(class="form-control-label") }}
+                        {% if form.cust_id.errors %}
+                        {{ form.cust_id(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.cust_id.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.cust_id(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.acc_type.label(class="form-control-label") }}
+                        {% if form.acc_type.errors %}
+                        {{ form.acc_type(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.acc_type.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.acc_type(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.acc_balance.label(class="form-control-label") }}
+                        {% if form.acc_balance.errors %}
+                        {{ form.acc_balance(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.acc_balance.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.acc_balance(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.submit(class="form-control btn-success") }}
+                    </div>
+                </fieldset>
             </div>
+            <div class="col-4"></div>
         </div>
-    </footer>
-    </div>
-    </div>
-
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- owl carousel js-->
-    <script src="owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-
+    </form>
 {% endblock %}

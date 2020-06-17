@@ -9,7 +9,6 @@ from application.utils import mail_send, searchCustomer, searchAccount, depositM
 @app.route("/home",methods=["GET","POST"])
 def home():
 	if request.method == "POST":
-		print("hello")
 		fullname = request.form.get('fullname')
 		email = request.form.get('email')
 		message = request.form.get('message')
@@ -17,7 +16,7 @@ def home():
 		value = mail_send(fullname,email,message)
 		return value
 	else:
-		return render_template("home.html",title="Moody Bank",role=session.get('ROLE'))
+		return render_template("home.html",title="Moody Bank")
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -49,26 +48,11 @@ def create_customer():
 	else:
 	    form = CustomerDetailsForm()
 	    if form.validate_on_submit():
-	        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data,
-	                           cust_address=form.address.data,cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
+	        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data, cust_address=form.address.data, cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
 	        db.session.add(customer)
 	        db.session.commit()
 	        return redirect("/create_customer")
 	    return render_template("create_customer.html",form=form, title="Create Customer")
-
-
-#============================================Misc Functions=======================================#
-def show_account_details(account, delete=False):
-	form_conf = AccountConfirmationForm()
-	if delete:
-		if form_conf.validate_on_submit():
-			print(form_conf.confirm.data)
-			if form_conf.confirm.data == True and form_conf.acc_no.data == account.acc_no:
-				db.session.delete(account)
-				db.session.commit()
-				flash("Customer Deleted!!!", category="success")
-				return redirect('home')
-	return render_template('show_account_details.html', account=account, delete=delete, title="Show Account Details", form=form_conf)
 
 
 #============================================Delete Customer=======================================#
@@ -88,7 +72,6 @@ def delete_customer(cust_id):
 			db.session.commit()
 			flash("Customer Successfully Deleted!!!", category="success")
 			return redirect(url_for('home'))
-			print(not form.confirm.data) or (form.cust_id.data != cust_id)
 		elif (not form.confirm.data) or (form.cust_id.data != cust_id):
 			flash("Wrong input data!!!", category="danger")
 			return redirect(url_for('home'))
@@ -187,7 +170,6 @@ def delete_account(acc_no):
 			db.session.commit()
 			flash("Account Successfully Deleted!!!", category="success")
 			return redirect(url_for('home'))
-			print(not form.confirm.data) or (form.acc_no.data != acc_no)
 		elif (not form.confirm.data) or (form.acc_no.data != acc_no):
 			flash("Wrong input data!!!", category="danger")
 			return redirect(url_for('home'))
@@ -211,6 +193,7 @@ def search_account():
 @app.route("/deposit/<int:acc_no>",methods=["GET","POST"])
 def deposit(acc_no):
 	form = DepositMoneyForm()
+	account = searchAccount(acc_no=acc_no)
 	if form.validate_on_submit():
 		result = depositMoney(depositAmount=form.depositAmount.data, acc_no=acc_no)
 		if result == "Success":
@@ -219,13 +202,14 @@ def deposit(acc_no):
 		else:
 			flash("Amount Not Deposited...", category="danger")
 			return redirect(url_for('home'))
-	return render_template("deposit.html",title="Deposit Money")
+	return render_template("deposit.html",title="Deposit Money", account=account, form=form)
 
 
 #============================================Withdraw Money=======================================#
 @app.route("/withdraw/<int:acc_no>",methods=["GET","POST"])
 def withdraw(acc_no):
 	form = WithdrawMoneyForm()
+	account = searchAccount(acc_no=acc_no)
 	if form.validate_on_submit():
 		result = withdrawMoney(withdrawAmount=form.withdrawAmount.data, acc_no=acc_no)
 		if result == "Success":
@@ -234,21 +218,22 @@ def withdraw(acc_no):
 		else:
 			flash("Amount Not Withdrawn...", category="danger")
 			return redirect(url_for('home'))
-	return render_template("withdraw.html",title="Withdraw Money")
+	return render_template("withdraw.html",title="Withdraw Money", account=account, form=form)
 
 #============================================Transfer Money=======================================#
-@app.route("/transfer/<int:cust_id>",methods=["GET","POST"])
-def transfer(cust_id):
+@app.route("/transfer/<int:acc_no>",methods=["GET","POST"])
+def transfer(acc_no):
 	form = TransferMoneyForm()
+	account = searchAccount(acc_no=acc_no)
 	if form.validate_on_submit():
-		result = transferMoney(amount=form.transfer_amount.data, cust_id=cust_id, from_acc=form.from_acc.data, to_acc=form.to_account.data)
+		result = transferMoney(amount=form.transfer_amount.data, cust_id=account.cust_id, from_acc=form.from_acc.data, to_acc=form.to_account.data)
 		if result == "Success":
 			flash("Amount Successfully Transfered...", category="success")
 			return redirect(url_for('home'))
 		else:
 			flash("Amount Not Transfered...", category="danger")
 			return redirect(url_for('home'))
-	return render_template("transfer.html",title="Transfer Money")
+	return render_template("transfer.html",title="Transfer Money", account=account, form=form)
 
 #============================================Account Statement=======================================#
 @app.route("/acc_statement",methods=["GET","POST"])

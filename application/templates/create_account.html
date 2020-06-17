@@ -1,17 +1,76 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block content %}
+    <!-- code block for create account form section -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="create_account">
+                    <br />
+                    <div class="form-group required"
+                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Create Account</b></h3>
+                        <form>
+                            <hr />
+                            <table style="text-align: centre;">
+                                <tr>
+                                    <td>
+                                        <h5>{{form.acc_no.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.acc_no(class="form-control")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.cust_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_id(class="form-control")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.acc_type.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" style="margin: 20px 80px;">
+                                            {{form.acc_type}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <br />
+                                <tr>
+                                    <td>
+                                        <h5><label class="control-label">Deposit Amount:</label></h5>
+                                    </td>
+                                    <td><input type="number" class="form-control" placeholder="" name="deposit"
+                                            required></td>
+                                </tr>
+                            </table>
+                            <br />
 
-<-- Dummy Form for testing... -->
-<form action="" method="POST">
-	{{ form.hidden_tag() }}
-	{{ form.acc_no.label }}
-    {{ form.acc_no }}
-    {{ form.acc_balance.label }}
-	{{ form.acc_balance }}
-	{{ form.acc_type.label }}
-    {{ form.acc_type }}
-    {{ form.cust_id.label }}
-    {{ form.cust_id }}
-	{{ form.submit }}
-</form>
-{% endblock content %}
+                            <button type="button" class="btn btn-info"
+                                style="width:200px; margin:0px 220px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">CREATE
+                                ACCOUNT</button>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+                <div class="col-8 text-center">
+                    <br />
+                    <br />
+                    <hr />
+                    <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span
+                            style="color: #1d3ede;">AVENGERS</span>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+{% endblock %}

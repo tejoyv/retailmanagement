@@ -1,22 +1,76 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block content %}
-<-- Dummy Form for testing... -->
-<form action="" method="POST">
-	{{ form.hidden_tag() }}
-	{{ form.ssn_id.label }}
-	{{ form.ssn_id }}
-	{{ form.cust_id.label }}
-	{{ form.cust_id }}
-	{{ form.submit }}
-	<div>
-		{% for error in form.ssn_id.errors %}
-			<span>ssn error - {{ error }}</span>
-		{% endfor %}
-	</div>
-	<div>
-		{% for error in form.cust_id.errors %}
-			<span>cust id error - {{ error }}</span>
-		{% endfor %}
-	</div>
-</form>
-{% endblock content %}
+    <!-- code block for customer details form -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="transfer">
+                    <br />
+                    <div class="form-group required"
+                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Customer details</b></h3>
+                        <hr />
+                        <form>
+
+                            <table style="text-align: centre;">
+                                <tr>
+                                    <td>
+                                       <h5>{{form.ssn_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.ssn_id(class="form-control")}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p>OR</p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                       <h5>{{form.cust_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_id(class="form-control")}}</td>
+                                </tr>
+                            </table>
+                            <br />
+
+                            </table>
+                            <br />
+
+                            <button type="button" class="btn btn-info"
+                                style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">VIEW</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-8 text-center">
+                <br />
+                <br />
+                <hr />
+                <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span style="color: #1d3ede;">AVENGERS</span>.
+                </p>
+            </div>
+        </div>
+        </div>
+    </footer>
+    </div>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+{% endblock %}

@@ -216,3 +216,19 @@ def logout():
 	session['USER_ID'] = None
 	session['ROLE'] = None
 	return redirect(url_for('home'))
+
+@app.route("/deposit",methods=["GET","POST"])
+def deposit():
+	return render_template("deposit.html",title="Deposit Money")
+
+@app.route("/withdraw",methods=["GET","POST"])
+def withdraw():
+	return render_template("withdraw.html",title="Withdraw Money")
+
+@app.route("/transfer",methods=["GET","POST"])
+def transfer():
+	return render_template("transfer.html",title="Transfer Money")
+
+@app.route("/acc_statement",methods=["GET","POST"])
+def acc_statement():
+	return render_template("acc_statement.html",title="Account Statement")

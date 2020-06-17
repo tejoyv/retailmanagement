@@ -1,22 +1,104 @@
-{% extends 'layout.html' %}
-{% block content %}
-<-- Dummy Form for testing... -->
-<form action="" method="POST">
-	{{ form.hidden_tag() }}
-	{{ form.ssn_id.label }}
-	{{ form.ssn_id }}
-	{{ form.cust_id.label }}
-	{{ form.cust_id }}
-	{{ form.submit }}
-	<div>
-		{% for error in form.ssn_id.errors %}
-			<span>ssn error - {{ error }}</span>
-		{% endfor %}
-	</div>
-	<div>
-		{% for error in form.cust_id.errors %}
-			<span>cust id error - {{ error }}</span>
-		{% endfor %}
-	</div>
-</form>
-{% endblock content %}
+{% extends "layout.html" %}
+{% block content%}
+
+    <!-- code block for delete customer form section -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="delete_cust">
+                    <br />
+                    <div class="form-group required"
+                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Delete Customer</b></h3>
+                        <hr />
+                        <form>
+                            <table style="text-align: centre;">
+
+                                <tr>
+                                    <td>
+                                        <h5>{{form.ssn_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.ssn_id(class="form-control")}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p>OR</p>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <h5>{{form.cust_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_id(class="form-control")}}
+                                    </td>
+                                </tr>
+                            </table>
+							<br />
+							
+                      		{{form.submit(class="btn btn-info")}}
+
+                            <!-- code block activated after search query is executed -->
+                            <div id="demo4" class="collapse">
+                                <br />
+                                <table>
+                                    <hr />
+                                    <tr>
+                                        <td>
+                                            <h5><label>Customer Name:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Age:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Address:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><button type="button" class="btn btn-info"
+                                                style="width:150px; margin:0px 20px;height:50px; border-radius:50px;">CANCEL</button>
+                                        </td>
+                                        <td><button type="button" class="btn btn-danger"
+                                                style="width:150px; margin:0px 120px;height:50px; border-radius:50px;">CONFIRM
+                                                DELETE</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br />
+                        </form>
+                    </div>
+
+                </div>
+                <hr />
+                <div class="col-8 text-center">
+                    <br />
+                    <br />
+                    <hr />
+                    <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span
+                            style="color: #1d3ede;">AVENGERS</span>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+{% endblock %}

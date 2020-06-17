@@ -28,15 +28,15 @@ def login():
 		form = LoginForm()
 		if form.validate_on_submit():
 			user = User.query.filter_by(user_id=form.username.data).first()
-			if bcrypt.check_password_hash(user.password, form.password.data):
+			if  user and bcrypt.check_password_hash(user.password, form.password.data):
 				flash("Successfully logged in!!!", category="success")
 				session['USER_ID'] = user.user_id
 				session['ROLE'] = user.role
 				return redirect(url_for('home'))
-			else:
+			elif  user and not bcrypt.check_password_hash(user.password, form.password.data):
 				flash("Wrong password entered!!!", category="danger")
-		else:
-			flash("Wrong username entered!!!", category="danger")
+			else:	
+				flash("Wrong username entered!!!", category="danger")
 		return render_template("login.html", title="Login", form=form)
   
 #============================================Account executive routes=======================================#
@@ -185,7 +185,8 @@ def delete_account():
 	if form.validate_on_submit():
 		account = searchAccount(acc_no=form.acc_no.data, cust_id=form.cust_id.data, acc_type=form.acc_type.data)
 		if account == None:
-			return "Account not found!!!"
+			flash("Acount not found...", category="danger")
+			return redirect(url_for('home'))
 		else:
 			return show_account_details(account, delete=True)
 	return render_template('delete_account.html', form=form, title="Delete Account")
@@ -197,9 +198,10 @@ def search_account():
 	if form.validate_on_submit():
 		account = searchAccount(acc_no=form.acc_no.data, cust_id=form.cust_id.data, acc_type=form.acc_type.data)
 		if account == None:
-			return "Account not found!!!"
+			flash("Acount not found...", category="danger")
+			return redirect(url_for('home'))
 		else:
-			return show_account_details(account)
+			return render_template('show_account_details.html', account=account, title="Show Account Details")
 	return render_template('search_account.html', form=form, title="Search Account")
 
 

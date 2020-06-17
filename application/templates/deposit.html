@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- code block for deposit form -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="deposit">
+                    <br />
+                    <div class="form-group required"
+                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Deposit Money</b></h3>
+                        <hr />
+                        <form>
+                            <table style="text-align: centre;">
+                                <tr>
+                                    <td>
+                                        <h5><label class="control-label">Customer ID:</label></h5>
+                                    </td>
+                                    <td><input type="number" name="cust_id" class="form-control" placeholder=""
+                                            required></td>
+                                    <!--<td><span> for fetching from db</span><td>-->
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p>OR</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5><label class="control-label">Account ID:</label></h5>
+                                    </td>
+                                    <td><input type="number" name="acc_id" class="form-control" placeholder=" "
+                                            required></td>
+                                    <!--<td><span> for fetching from db</span><td>-->
+                                </tr>
+                            </table>
+                            <button type="button" data-toggle="collapse" data-target="#demo6" class="btn btn-info"
+                                style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">SEARCH</button>
+
+                            <!-- code block activated when search query is executed to find account details -->
+                            <div id="demo6" class="collapse">
+                                <br />
+                                <hr />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Customer ID:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                        <!--<td><span> for fetching from db</span><td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Account ID:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                        <!--<td><span> for fetching from db</span><td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label class="control-label">Amount to Deposit:</label></h5>
+                                        </td>
+                                        <td><input type="number" name="Deposit Amount" placeholder=""
+                                                class="form-control" required></td>
+                                        <td><button type="button" class="btn btn-danger" data-toggle="collapse"
+                                                data-target="#demo7"
+                                                style="width:120px; margin:0px 30px 30px 30px;height:50px; border-radius:50px;">DEPOSIT</button>
+                                        </td>
+                                        <!--<td><span> for fetching from db</span><td>-->
+                                    </tr>
+                                </table>
+                                <div id="demo7" class="collapse" style="background-color: pink;border-radius:10px;">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <h5><label>Balance Before Deposit:</label></h5>
+                                            </td>
+                                            <td><span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5><label>Latest Balance:</label></h5>
+                                            </td>
+                                            <td><span></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <br />
+                        </form>
+                    </div>
+
+                    <div class="col-8 text-center">
+                        <br />
+                        <br />
+                        <hr />
+                        <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span
+                                style="color: #1d3ede;">AVENGERS</span>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    </div>
+
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+{% endblock %}

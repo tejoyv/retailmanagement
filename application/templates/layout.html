@@ -13,8 +13,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!-- custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-	
+    {% if title == "Moody Bank" %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
+    {% endif %}
 </head>
 <body>
 
@@ -31,14 +34,27 @@
                     <!-- Customer related operations -->
 
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create_customer') }}">Create Customer</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('view_customers_status') }}">View All Customers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_customer') }}">Search Customer</a></li>
+
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="CustomerOperations" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer operations</a>
+                    <div class="dropdown-menu" aria-labelledby="CustomerOperations">
+                              <a class="dropdown-item" href="{{ url_for('create_customer') }}">Create Customer</a>
+                              <a class="dropdown-item" href="{{ url_for('view_customers_status') }}">View All Customers</a>
+                              <a class="dropdown-item" href="{{ url_for('search_customer') }}">Search Customer</a>
+
+                    </div>
+                    </li>
                     <!-- Account related Operations -->
 
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('view_accounts_status') }}">View All Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create_account') }}">Create Customer Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('delete_account') }}">Delete Customer Accounts</a></li>
+                     <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="AccountOperations" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Operations</a>
+                        <div class="dropdown-menu" aria-labelledby="AccountOperations">
+                          <a class="dropdown-item" href="{{ url_for('view_accounts_status') }}">View All Accounts</a>
+                          <a class="dropdown-item" href="{{ url_for('create_account') }}">Create Customer Accounts</a>
+                          <a class="dropdown-item" href="{{ url_for('delete_account') }}">Delete Customer Accounts</a>
+                        </div>
+                      </li>
+
 
                 </ul>
                 {% elif session.get('ROLE') == "teller" %}
@@ -46,11 +62,20 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
 
                     <!-- Account related Operations -->
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('search_account') }}">Search Account</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Deposite Money</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Withdraw Money</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Transfer Money</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Print Statement</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="AccountOperations2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Account Operations
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="AccountOperations2">
+                          <a class="dropdown-item" href="{{ url_for('search_account') }}">Search Account</a>
+                          <a class="dropdown-item" href="{{ url_for('deposit') }}">Deposit Money</a>
+                          <a class="dropdown-item" href="{{ url_for('withdraw') }}">Withdraw Money</a>
+                          <a class="dropdown-item" href="{{ url_for('transfer') }}">Transfer Money</a>
+                        </div>
+                      </li>
+
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('acc_statement') }}">Print Statement</a></li>
                 </ul>
                 {% else %}
                 <ul class="navbar-nav mr-auto">
@@ -87,5 +112,9 @@
             {% endblock content %}
           </div>
         </div>
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

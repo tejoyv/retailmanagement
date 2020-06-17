@@ -1,26 +1,98 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block content %}
+        <!-- code block for create customer form section -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="create_cust">
+                    <div class="form-group required"
+                        style="background-color:#f1f6fd;width: 600px; padding:50px;border-radius:30px;">
+                        <br />
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Create Customer</b></h3>
+                        <hr />
+                        <form>
+                            <table style="text-align: centre;">
+                                <tr>
+                                    <td>
+                                        <h5>{{form.ssn_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.ssn_id(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.cust_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_id(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.cust_name.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_name(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.cust_age.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_age(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.address.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_age(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.state.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.state(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <br />
 
-<-- Dummy Form for testing... -->
-<form action="" method="POST">
-	{{ form.hidden_tag() }}
-	{{ form.ssn_id.label }}
-    {{ form.ssn_id }}
-    {{ form.cust_id.label }}
-	{{ form.cust_id }}
-	{{ form.cust_name.label }}
-    {{ form.cust_name }}
-    {{ form.cust_age.label }}
-    {{ form.cust_age }}
-    {{ form.address.label }}
-    {{ form.address }}
-    {{ form.contact.label }}
-    {{ form.contact }}
-    {{ form.state.label }}
-    {{ form.state }}
-    {{ form.city.label }}
-    {{ form.city }}
-	{{ form.submit }}
-	
-</form>
-{% endblock content %}
+                                <tr>
+                                    <br />
+                                    <td>
+                                        <h5>{{form.city.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.city(class="form-control",style="width:180%;")}}</td>
+                                </tr>
+                                <tr>
+                                    <td><br /></td>
+                                    <td><br /></td>
+                                </tr>
+
+                                <tr>
+                                    <td><button type="reset" value="Reset" class="btn btn-info"
+                                            style="width:160px; margin:0px 0px; border-radius:50px; height:50px;">CLEAR</button>
+                                    </td>
+                                    <td style="width:160px; margin:0px 100px; border-radius:50px; height:50px; ">{{form.submit(class="btn btn-primary")}}</td>
+                                </tr>
+                            </table>
+                        </form>
+                        <br />
+                    </div>
+                </div>
+                <hr />
+                <div class="col-8 text-center">
+                    <br />
+                    <br />
+                    <hr />
+                    <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span
+                            style="color: #1d3ede;">AVENGERS</span>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+{% endblock %}

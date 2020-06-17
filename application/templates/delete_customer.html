@@ -1,51 +1,68 @@
 {% extends "layout.html" %}
 {% block content%}
-    <!-- code block for delete account form section -->
+
+    <!-- code block for delete customer form section -->
     <footer class="container-fluid" id="gtco-footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6" id="delete_account">
+                <div class="col-lg-6" id="delete_cust">
                     <br />
                     <div class="form-group required"
                         style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
-                        <h3 style="color:#1d3ede; margin:20px;"><b>Delete Account</b></h3>
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Delete Customer</b></h3>
                         <hr />
                         <form>
                             <table style="text-align: centre;">
-                                <tr>
+
                                 <tr>
                                     <td>
-                                       <h5> {{form.acc_no.label(class="control-label")}}</h5>
+                                        <h5>{{form.ssn_id.label(class="control-label")}}</h5>
                                     </td>
-                                    <td>{{form.acc_no(class="form-control")}}
+                                    <td>{{form.ssn_id(class="form-control")}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>OR</td>
-                                </tr>
-                                <tr>
                                     <td>
-                                      <h5> {{form.cust_id.label(class="control-label")}}</h5>
+                                        <p>OR</p>
                                     </td>
-                                    <td>{{form.cust_id(class="form-control")}}</td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <h5>{{form.cust_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_id(class="form-control")}}
+                                    </td>
                                 </tr>
                             </table>
-                            <br />
-                            <button type="button" data-toggle="collapse" data-target="#demo5" class="btn btn-info"
-                                style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">SEARCH</button>
+							<br />
+							
+                      		{{form.submit(class="btn btn-info")}}
 
                             <!-- code block activated after search query is executed -->
-                            <div id="demo5" class="collapse">
+                            <div id="demo4" class="collapse">
                                 <br />
                                 <table>
                                     <hr />
                                     <tr>
                                         <td>
-                                            <h5><label>Account ID:</label></h5>
+                                            <h5><label>Customer Name:</label></h5>
                                         </td>
                                         <td><span></span></td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Age:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Address:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+
                                     <tr>
                                         <td><button type="button" class="btn btn-info"
                                                 style="width:150px; margin:0px 20px;height:50px; border-radius:50px;">CANCEL</button>
@@ -56,6 +73,8 @@
                                     </tr>
                                 </table>
                             </div>
+
+                            <br />
                         </form>
                     </div>
 

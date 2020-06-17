@@ -1,0 +1,140 @@
+{% extends "layout.html"%}
+{% block content %}
+    <!-- code block for update customer form -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="update_cust">
+                    <div class="form-group required"
+                        style="background-color:#f1f6fd;width: 600px; padding:50px;border-radius:30px;">
+                        <br />
+                        <h3 style="color:#1d3ede; margin:20px;"><b>Update Customer</b></h3>
+
+                        <hr />
+                        <form>
+                            <p>Enter Customer SSN ID or Customer ID to update the details of customer.</p>
+                            <table style="text-align: centre;">
+
+                                <tr>
+                                    <td>
+                                        <h5>{{form.ssn_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.ssn_id(class="form-control")}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p>OR</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>{{form.cust_id.label(class="control-label")}}</h5>
+                                    </td>
+                                    <td>{{form.cust_id(class="form-control")}}</td>
+                                </tr>
+
+                            </table>
+                            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"
+                                style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">VIEW</button>
+
+                            <br />
+                            <br />
+                            <br />
+                            
+                            <!-- code block activated when view button is selected(search query executed) -->
+                            <div id="demo" class="collapse">
+                                <hr />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Customer SSN ID:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Customer ID:</label></h5>
+                                        </td>
+                                        <td><span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Old Customer Name:</label></h5>
+                                        </td>
+                                        <td><span>
+                                                <!--- customer name should be fetched from the db.--> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label class="control-label">New Customer Name:</label></h5>
+                                        </td>
+                                        <td><input type="number" class="form-control" name=""
+                                                placeholder="Enter new name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Old Address:</label></h5>
+                                        </td>
+                                        <td><span>
+                                                <!--- customer name should be fetched from the db.--> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label class="control-label">Old Address:</label></h5>
+                                        </td>
+                                        <td><input type="number" class="form-control" name=""
+                                                placeholder="Enter new name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label>Old Age:</label></h5>
+                                        </td>
+                                        <td><span>
+                                                <!--- customer name should be fetched from the db.--> </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5><label class="control-label">New Age:</label></h5>
+                                        </td>
+                                        <td><input type="number" class="form-control" name=""
+                                                placeholder="Enter new name"></td>
+                                    </tr>
+                                </table>
+                                <br />
+
+                                <button type="button" class="btn btn-info"
+                                    style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">UPDATE</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-8 text-center">
+                <br />
+                <br />
+                <hr />
+                <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span style="color: #1d3ede;">AVENGERS</span>.
+                </p>
+            </div>
+        </div>
+        </div>
+
+    </footer>
+    </div>
+    </div>
+
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+{% endblock %}

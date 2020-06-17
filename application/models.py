@@ -22,6 +22,12 @@ class Customer(db.Model):
 	accounts = db.relationship('Account', backref='Owner', lazy=True)
 	transactions = db.relationship('Transaction', backref='Owner', lazy=True)
 
+	@staticmethod
+	def generate_cust_id():
+		first_cust_id = Customer.query.first().cust_id
+		tot_accounts = len(Customer.query.all())
+		return (first_cust_id + tot_accounts + 1)
+
 	def __repr__(self):
 		return f"Customer('{self.cust_id}', '{self.cust_name}')"
 

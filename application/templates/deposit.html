@@ -24,7 +24,8 @@
                 <div class="col-6">{{ account.acc_balance }}</div>
             </div>
             <div>
-                <form>
+                <form action="" method="POST">
+                    {{ form.hidden_tag() }}
                     {{ form.depositAmount.label }} : 
                     {{ form.depositAmount }}
                     {{ form.submit(class="btn btn-success") }}

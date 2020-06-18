@@ -20,7 +20,13 @@
 			<td>{{ customer.cust_id }}</td>
 			<td>{{ customer.cust_name }}</td>
 			<td>{{ customer.cust_contact }}</td>
-			<td>{{ customer.transactions[-1].transaction_date }}</td>
+			<td>
+			{% if not customer.transactions[-1]%}
+				No Transactions
+			{% else %}
+				{{ customer.transactions[-1].transaction_date }}
+			{% endif %}
+			</td>
 		</tr>
 		{% endfor%}
 	</tbody>

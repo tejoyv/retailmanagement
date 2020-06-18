@@ -51,7 +51,8 @@ def create_customer():
 	        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data, cust_address=form.address.data, cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
 	        db.session.add(customer)
 	        db.session.commit()
-	        return redirect("/create_customer")
+	        flash("Customer Successfully Created!!!", category="success")
+	        return redirect(url_for('home'))
 	    return render_template("create_customer.html",form=form, title="Create Customer")
 
 
@@ -82,18 +83,19 @@ def delete_customer(cust_id):
 #============================================Update Customer=======================================#
 @app.route("/update_customer_details/<int:cust_id>", methods=['GET', 'POST'])
 def update_customer_details(cust_id):
-	customer = Customer.query.filter_by(cust_id=cust_id).first()
 	form = CustomerDetailsForm()
+	customer = searchCustomer(cust_id=cust_id)
+	form.ssn_id.data = customer.ssn
+	form.cust_id.data = customer.cust_id
 	if form.validate_on_submit():
 		customer.cust_name = form.cust_name.data
-		customer.address = form.address.data
-		customer.contact = form.contact.data
+		customer.cust_address = form.address.data
+		customer.cust_contact = form.contact.data
 		customer.cust_age = form.cust_age.data
 		db.session.commit()
 		flash("Customer Details are updated!!!", category="success")
 		return redirect(url_for('home'))
-	return render_template('update_customer_details.html', title="Update Details", form=form, customer=customer)
-
+	return render_template('update_customer_details.html', cust_id=cust_id, title="Update Customer Details", form=form)
 
 @app.route("/update_customer/<int:cust_id>", methods=['GET', 'POST'])
 def update_customer(cust_id):
@@ -102,6 +104,7 @@ def update_customer(cust_id):
 	if form.validate_on_submit():
 		if form.confirm.data and form.cust_id.data == cust_id:
 			return redirect(url_for('update_customer_details', cust_id=cust_id))
+			return render_template('update_customer_details.html', title="Update Details", form=form, customer=customer)
 		else:
 			flash("Wrong input data!!!", category="danger")
 			return redirect(url_for('home'))
@@ -156,7 +159,8 @@ def create_account():
 	        account = Account(acc_no=form.acc_no.data, acc_balance=form.acc_balance.data, acc_type=form.acc_type.data, cust_id=form.cust_id.data)
 	        db.session.add(account)
 	        db.session.commit()
-	        return redirect("/create_account")
+	        flash("Account Successfully Created!!!", category="success")
+	        return redirect(url_for('home'))
 	    return render_template("create_account.html",form=form, title="Create Customer")
 
 #============================================Delete Account=======================================#
@@ -209,7 +213,7 @@ def deposit(acc_no):
 @app.route("/withdraw/<int:acc_no>",methods=["GET","POST"])
 def withdraw(acc_no):
 	form = WithdrawMoneyForm()
-	account = searchAccount(acc_no=acc_no)
+	account = Account.query.filter_by(acc_no=acc_no).first()
 	if form.validate_on_submit():
 		result = withdrawMoney(withdrawAmount=form.withdrawAmount.data, acc_no=acc_no)
 		if result == "Success":
@@ -226,7 +230,8 @@ def transfer(acc_no):
 	form = TransferMoneyForm()
 	account = searchAccount(acc_no=acc_no)
 	if form.validate_on_submit():
-		result = transferMoney(amount=form.transfer_amount.data, cust_id=account.cust_id, from_acc=form.from_acc.data, to_acc=form.to_account.data)
+		print(form.amount.data, account.cust_id, form.from_acc.data, form.to_acc.data)
+		result = transferMoney(amount=form.amount.data, cust_id=account.cust_id, from_acc=form.from_acc.data, to_acc=form.to_acc.data)
 		if result == "Success":
 			flash("Amount Successfully Transfered...", category="success")
 			return redirect(url_for('home'))

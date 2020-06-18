@@ -60,6 +60,19 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        {{ form.contact.label(class="form-control-label") }}
+                        {% if form.contact.errors %}
+                        {{ form.contact(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.contact.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.contact(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
                         {{ form.address.label(class="form-control-label") }}
                         {% if form.address.errors %}
                         {{ form.address(class="form-control is-invalid") }}

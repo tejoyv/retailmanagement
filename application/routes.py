@@ -281,9 +281,12 @@ def acc_statement(acc_no):
 	return render_template("acc_statement.html",title="Account Statement", form=form)
 	
 
-<<<<<<< HEAD
 @app.route("/logout")
-=======
+def logout():
+	session['USER_ID'] = None
+	session['ROLE'] = None
+	return redirect(url_for('home'))
+
 
 @app.route("/dashboard")
 def dashboard():
@@ -291,11 +294,4 @@ def dashboard():
 	account = len(Account.query.all())
 	return render_template("dashboard.html",title="Dashboard",customers=customers,account=account)
 
-
-@app.route("/logout", methods=['GET', 'POST'])
->>>>>>> 64742b4c5f1cac30c371850cd4ae6d3bef56dd2d
-def logout():
-	session['USER_ID'] = None
-	session['ROLE'] = None
-	return redirect(url_for('home'))
 

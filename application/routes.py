@@ -47,6 +47,7 @@ def create_customer():
 		return "Action Not Allowed"
 	else:
 	    form = CustomerDetailsForm()
+	    form.cust_id.data = Customer.generate_cust_id()
 	    if form.validate_on_submit():
 	        customer = Customer(ssn=form.ssn_id.data,cust_id=form.cust_id.data,cust_name=form.cust_name.data, cust_address=form.address.data, cust_contact = form.contact.data,cust_age=form.cust_age.data,cust_state=form.state.data,cust_city=form.city.data)
 	        db.session.add(customer)
@@ -138,6 +139,15 @@ def view_customers_status():
 		return render_template("view_customers_status.html", customers=customers, title="View All Customer")
 
 
+@app.route("/show_customer_details/<int:cust_id>")
+def show_customer_details(cust_id):
+	customer = Customer.query.filter_by(cust_id=cust_id).first()
+	if customer == None:
+		flash("Customer not found...", category="danger")
+		return redirect(url_for('home'))
+	else:
+		return render_template('show_customer_details.html', customer=customer, title="Show Customer Details")
+
 #============================================View All Accounts=======================================#
 @app.route("/view_accounts_status", methods=['GET', 'POST'])
 def view_accounts_status():
@@ -148,6 +158,15 @@ def view_accounts_status():
 		accounts = Account.query.order_by(Account.acc_no).paginate(page=page, per_page=10)
 		return render_template("view_accounts_status.html", accounts=accounts, title="View All Accounts")
 
+@app.route("/show_account_details/<int:acc_no>")
+def show_account_details(acc_no):
+	account = Account.query.filter_by(acc_no=acc_no).first()
+	if account == None:
+		flash("Account not found...", category="danger")
+		return redirect(url_for('home'))
+	else:
+		return render_template('show_account_details.html', account=account, title="Show Account Details")
+
 #============================================Create New Account=======================================#
 @app.route("/create_account",methods=["GET","POST"])
 def create_account():
@@ -155,6 +174,7 @@ def create_account():
 		return "Action Not Allowed"
 	else:
 	    form = AccountDetailsForm()
+	    form.acc_no.data = Account.generate_acc_no()
 	    if form.validate_on_submit():
 	        account = Account(acc_no=form.acc_no.data, acc_balance=form.acc_balance.data, acc_type=form.acc_type.data, cust_id=form.cust_id.data)
 	        db.session.add(account)
@@ -243,6 +263,7 @@ def transfer(acc_no):
 #============================================Account Statement=======================================#
 @app.route("/acc_statement",methods=["GET","POST"])
 def acc_statement():
+	
 	return render_template("acc_statement.html",title="Account Statement")
 
 @app.route("/logout", methods=['GET', 'POST'])

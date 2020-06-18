@@ -279,7 +279,11 @@ def acc_statement(acc_no):
 					statement_transactions.append(transaction)
 			return render_template('show_transactions.html', transactions=statement_transactions, title="Account Statement", account=account)
 	return render_template("acc_statement.html",title="Account Statement", form=form)
+	
 
+<<<<<<< HEAD
+@app.route("/logout")
+=======
 
 @app.route("/dashboard")
 def dashboard():
@@ -289,6 +293,7 @@ def dashboard():
 
 
 @app.route("/logout", methods=['GET', 'POST'])
+>>>>>>> 64742b4c5f1cac30c371850cd4ae6d3bef56dd2d
 def logout():
 	session['USER_ID'] = None
 	session['ROLE'] = None

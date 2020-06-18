@@ -31,7 +31,7 @@ def login():
 				flash("Successfully logged in!!!", category="success")
 				session['USER_ID'] = user.user_id
 				session['ROLE'] = user.role
-				return redirect(url_for('home'))
+				return redirect(url_for('dashboard'))
 			elif  user and not bcrypt.check_password_hash(user.password, form.password.data):
 				flash("Wrong password entered!!!", category="danger")
 			else:	
@@ -281,7 +281,19 @@ def acc_statement(acc_no):
 	return render_template("acc_statement.html",title="Account Statement", form=form)
 	
 
+<<<<<<< HEAD
 @app.route("/logout")
+=======
+
+@app.route("/dashboard")
+def dashboard():
+	customers = len(Customer.query.all())
+	account = len(Account.query.all())
+	return render_template("dashboard.html",title="Dashboard",customers=customers,account=account)
+
+
+@app.route("/logout", methods=['GET', 'POST'])
+>>>>>>> 64742b4c5f1cac30c371850cd4ae6d3bef56dd2d
 def logout():
 	session['USER_ID'] = None
 	session['ROLE'] = None

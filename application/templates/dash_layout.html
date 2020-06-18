@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }} Page</title>
+
+    <!-- Required Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <!-- awesone fonts css-->
+    <link href="static/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <!-- owl carousel css-->
+    <link rel="stylesheet" href="static/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    {% if title == "Moody Bank" or title == "Login" %}
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style1.css') }}">
+    {% endif %}
+    {% if title == "Dashboard" %}
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dash_css.css') }}">
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      {% endif %}
+</head>
+<body>
+    <!-- Customise this Nav Bar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="gtco-main-nav">
+    <div class="container"><a class="navbar-brand">MOODY BANK</a>
+        <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse"><span
+                class="bar1"></span><span class="bar2"></span> <span class="bar3"></span></button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            
+          {% if session.get('ROLE') == "acc_exec" %}
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="customerOperations" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #007bff;font-weight: bold;">
+              Customer Operations
+            </a>
+            <div class="dropdown-menu" aria-labelledby="customerOperations">
+              <a class="dropdown-item" href="{{ url_for('create_customer') }}">Create Customer</a>
+              <a class="dropdown-item" href="{{ url_for('view_customers_status') }}">View All Customer</a>
+              <a class="dropdown-item" href="{{ url_for('search_customer') }}">Search Customer</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="accountOperations" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #007bff;font-weight: bold;">
+              Account Operations
+            </a>
+            <div class="dropdown-menu" aria-labelledby="accountOperations">
+              <a class="dropdown-item" href="{{ url_for('create_account') }}">Create Accounts</a>
+              <a class="dropdown-item" href="{{ url_for('view_accounts_status') }}">View All Accounts</a>
+              <a class="dropdown-item" href="{{ url_for('search_account') }}">Search Accounts</a>
+            </div>
+          </li>
+          </ul>
+          {% elif session.get('ROLE') == "teller" %}
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="accountOperations" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #007bff;font-weight: bold;">
+              Account Operations
+            </a>
+            <div class="dropdown-menu" aria-labelledby="accountOperations">
+              <a class="dropdown-item" href="{{ url_for('search_account') }}">Search Accounts</a>
+            </div>
+          </li>
+          </ul>
+          {% elif title=="Login"%}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+          {% else %}
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}" style="color: #007bff;font-weight: bold;">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#services" style="color: #007bff;font-weight: bold;font-weight: bold;">Service</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#contact" style="color: #007bff;font-weight: bold;font-weight: bold;">Contact</a></li>
+              </ul>
+          {% endif %}
+        </ul>
+      </div>
+
+            <form class="form-inline my-2 my-lg-0">
+                {% if not session.get('USER_ID') %}
+                <a href="{{ url_for('login') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a>
+                {% else %}
+                <a href="{{ url_for('logout') }}" class="btn btn-info my-2 my-sm-0 text-uppercase">Logout</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="container pt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    <!--Bootstrap JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+</body>
+</html>

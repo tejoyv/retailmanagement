@@ -13,8 +13,11 @@
     <link href="static/css/font-awesome.css" rel="stylesheet" type="text/css">
     <!-- owl carousel css-->
     <link rel="stylesheet" href="static/owl-carousel/assets/owl.carousel.min.css" type="text/css">
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    {% if title == "Moody Bank" or title == "Login" %}
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style1.css') }}">
+    {% endif %}
 </head>
 <body>
     <!-- Customise this Nav Bar -->

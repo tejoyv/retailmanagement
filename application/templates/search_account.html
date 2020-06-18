@@ -2,11 +2,11 @@
 {% block content%}
     <form class="pt-3" action="" method="POST">
         {{ form.hidden_tag() }}
-        <div class="row">
+        <div class="row" style="font-size: larger;">
             <div class="col-4"></div>
             <div class="col align-self-center">
                 <fieldset class="form-group">
-                    <legend>Search Account</legend>
+                    <legend class="text-info" style="font-weight: bold;">Search Account</legend><hr/>
                     <div class="form-group">
                         {{ form.acc_no.label(class="form-control-label") }}
                         {% if form.acc_no.errors %}
@@ -22,7 +22,7 @@
                     </div>
                     <div class="row">
                         <div class="col-5"></div>
-                        <div class="col-2">OR</div>
+                        <div class="col-2"><b>OR</b></div>
                         <div class="col-5"></div>
                     </div>
                     <div class="form-group">
@@ -52,7 +52,7 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        {{ form.submit(class="form-control btn-success") }}
+                      <br/>  {{ form.submit(class="form-control btn-primary") }}
                     </div>
                 </fieldset>
             </div>

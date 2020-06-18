@@ -1,39 +1,48 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="row">
+    <div class="row" style="margin-left:50px;margin-top: 30px; font-size: large;">
         <div class="col-3"></div>
         <div class="col align-self-center">
             <div class="row">
-            	<div class="col-6">Account Number :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Account Number :</div>
             	<div class="col-6">{{ account.acc_no }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Owner Name :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Owner Name :</div>
             	<div class="col-6">{{ account.Owner.cust_name }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Owner ID :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Owner ID :</div>
             	<div class="col-6">{{ account.cust_id }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Account Balance :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Account Balance :</div>
             	<div class="col-6">{{ account.acc_balance }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Account Type :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Account Type :</div>
                 {% if account.acc_type == 'S'%}
             	<div class="col-6">Savings</div>
                 {% elif account.acc_type == 'C' %}
                 <div class="col-6">Current</div>
                 {% endif %}
-            </div>
+            </div><br/>
             <div class="row">
+<<<<<<< HEAD
             	<div class="col-6">Account Created :</div>
             	<div class="col-6">{{ account.acc_createDate.strftime("%Y-%B-%d") }}</div>
             </div>
             <div class="row">
                 {% if session.get('ROLE') == "acc_exec" %}
             	   <a class="btn btn-success" href="{{ url_for('delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
+=======
+            	<div class="col-6 text-warning" style="font-weight: bold;">Account Created :</div>
+            	<div class="col-6">{{ account.acc_createDate }}</div>
+            </div><br/>
+            
+                {% if session.get('ROLE') == "acc_exec" %}<br/>
+            	   <a class="btn btn-danger" href="{{ url_for('delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
+>>>>>>> 21583070b2fb518615c4c6a6e7d79ea813be7b26
                 {% elif session.get('ROLE') == "teller" %}
                     <div>
                         <div class="col">
@@ -44,7 +53,7 @@
                         </div>
                     </div>                    
                 {% endif %}
-            </div>
+            
         </div>
         <div class="col-3"></div>
     </div>

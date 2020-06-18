@@ -270,15 +270,17 @@ def acc_statement(acc_no):
 		if form.choice.data == 'LT':
 			transactions = customer.transactions
 			transactions = transactions[-form.no_of_transactions.data:]
-			return render_template('show_transactions.html', transactions=transactions, title="Account Statement")
+			return render_template('show_transactions.html', transactions=transactions, title="Account Statement", account=account)
 		elif form.choice.data == 'BD':
 			transactions = customer.transactions
 			statement_transactions = []
 			for transaction in transactions:
 				if transaction.transaction_date >= form.from_date.data and transaction.transaction_date <= form.to_date.data:
 					statement_transactions.append(transaction)
-			return render_template('show_transactions.html', transactions=statement_transactions, title="Account Statement")
+			return render_template('show_transactions.html', transactions=statement_transactions, title="Account Statement", account=account)
 	return render_template("acc_statement.html",title="Account Statement", form=form)
+
+
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():

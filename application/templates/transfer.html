@@ -26,6 +26,7 @@
             <div class="row">
                 <div class="col-6">To Account :</div>
                 <form action="" method="POST">
+                    {{ form.hidden_tag() }}
                     <div>
                         {{ form.from_acc.label }} : 
                         {{ form.from_acc }}

@@ -108,12 +108,16 @@ class DepositMoneyForm(FlaskForm):
 	submit = SubmitField("Deposit")
 
 	def validate_depositAmount(self, depositAmount):
-		if depositAmount < 0:
+		if self.depositAmount.data < 0:
 			raise ValidationError("Wrong Input!!!")
 
 class WithdrawMoneyForm(FlaskForm):
 	withdrawAmount = FloatField("Withdraw Amount", validators=[DataRequired()])
 	submit = SubmitField("Withdraw")
+
+	def validate_withdrawAmount(self, depositAmount):
+		if self.withdrawAmount.data < 0:
+			raise ValidationError("Wrong Input!!!")
 
 class TransferMoneyForm(FlaskForm):
 	amount = FloatField("Amount", validators=[DataRequired()])

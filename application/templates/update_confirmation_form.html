@@ -1,26 +1,26 @@
 {% extends 'layout.html' %}
 {% block content %}
-	<div class="row">
+	<div class="row" style="font-size: large;">
         <div class="col-3"></div>
         <div class="col align-self-center">
-            <div class="row">
-            	<div>Do you want to update this customer??</div>
+            	<div class="text-warning" style="font-weight: bold;">Do you want to update this customer??</div>
             	<div>
             		<form action="", method="POST">
 					{{ form.hidden_tag() }}
-            	</div>
+				</div>
+				<br/>
             	<div>
             		<div>
 	            		{{ form.confirm }}
 	            		{{ form.confirm.label }}
 	            	</div>
             	</div>
-            	<div>
+				<div><br>
 	            	{% if form.cust_id %}
 	            	<div>
-	           			{{ form.cust_id.label }}
+	           			{{ form.cust_id.label(style="font-weight:bold",class="text-warning") }}
 	           		</div>
-					<div>
+					<div><br/>
 						{{ form.cust_id }}
 					</div>
 					{% elif form.acc_no %}
@@ -30,10 +30,10 @@
 					<div>
 						{{ form.acc_no }}
 					</div>
-					{% endif %}
-					{{ form.submit(class="btn btn-success") }}
+					{% endif %}<br>
+					{{ form.submit(class="btn btn-primary") }}
 				</div>
-            </div>
+            
         </div>
         <div class="col-3"></div>
     </div>

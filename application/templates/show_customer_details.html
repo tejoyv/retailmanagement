@@ -1,44 +1,44 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="row">
+    <div class="row" style="margin-left:50px;margin-top: 30px; font-size: large;">
         <div class="col-3"></div>
         <div class="col align-self-center">
             <div class="row">
-            	<div class="col-6">Customer SSN :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer SSN :</div>
             	<div class="col-6">{{ customer.ssn }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer ID :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer ID :</div>
             	<div class="col-6">{{ customer.cust_id }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer Name :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer Name :</div>
             	<div class="col-6">{{ customer.cust_name }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer Age :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer Age :</div>
             	<div class="col-6">{{ customer.cust_age }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer Contact :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer Contact :</div>
             	<div class="col-6">{{ customer.cust_contact }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer Address :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer Address :</div>
             	<div class="col-6">{{ customer.cust_address }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer City :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer City :</div>
             	<div class="col-6">{{ customer.cust_city }}</div>
-            </div>
+            </div><br/>
             <div class="row">
-            	<div class="col-6">Customer State :</div>
+            	<div class="col-6 text-warning" style="font-weight: bold;">Customer State :</div>
             	<div class="col-6">{{ customer.cust_state }}</div>
-            </div>
-            <div class="row">
-            	<a class="btn btn-success" href="{{ url_for('update_customer', cust_id=customer.cust_id) }}">Update this customer!!!</a>
+            </div><br/><br/>
+            <div class="row" style="margin-left: 5px;">
+            	<a class="btn btn-primary" href="{{ url_for('update_customer', cust_id=customer.cust_id) }}">Update this customer!!!</a>
             	<div class="col-1"></div>
-            	<a class="btn btn-success" href="{{ url_for('delete_customer', cust_id=customer.cust_id) }}">Delete this customer!!!</a>
+            	<a class="btn btn-danger" href="{{ url_for('delete_customer', cust_id=customer.cust_id) }}">Delete this customer!!!</a>
             </div>
         </div>
         <div class="col-3"></div>

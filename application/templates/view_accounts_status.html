@@ -14,6 +14,7 @@
 			<th scope="col">Account Creation Date</th>
 			<th scope="col">Account Balance</th>
 			<th scope="col">Account Last Updated</th>
+			<th scope="col">Operations</th>
 		</tr>
 	</thead>
 	{% for account in accounts.items %}
@@ -30,23 +31,29 @@
 				{{ account.Owner.transactions[-1].transaction_date }}
 			{% endif %}
 		</td>
+		<td><a href="{{ url_for('show_account_details', acc_no=account.acc_no) }}">Show Details</a></td>
 	</tr>
 	{% endfor%}
 </table>
 
 <!-- Page Numbers -->
 <nav aria-label="Page navigation">
-	<ul class="pagination">
-{% for page_num in accounts.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
-	{% if page_num %}
+	<div class="row">
+		<ul class="pagination">
+		{% for page_num in accounts.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
+			{% if page_num %}
 
-		<li class="page-item"><a class="page-link"href="{{ url_for('view_accounts_status', page=page_num)}}">{{page_num}}</a></li>	
+				<li class="page-item"><a class="page-link"href="{{ url_for('view_accounts_status', page=page_num)}}">{{page_num}}</a></li>	
 
-	{% else %}
-	...		
-	{% endif %}
-{% endfor %}
-</ul>
+			{% else %}
+			...		
+			{% endif %}
+		{% endfor %}
+		</ul>
+		<ul>
+			<a href="{{ url_for('view_accounts_status') }}" class="btn btn-primary">Refresh Page</a>
+		</ul>
+	</div>
 </nav>
 
 

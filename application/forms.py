@@ -31,7 +31,7 @@ class LoginForm(FlaskForm):
 
 class CustomerDetailsForm(FlaskForm):
 	ssn_id = IntegerField("Customer SSN Id",validators=[DataRequired()]) 
-	cust_id = IntegerField("Customer ID", default=Customer.generate_cust_id(), validators=[DataRequired()])
+	cust_id = IntegerField("Customer ID", validators=[DataRequired()])
 	cust_name = StringField("Customer Name",validators=[DataRequired(),Length(max=30)])
 	address = TextField("Address",validators=[DataRequired(),Length(max=30)])
 	contact = IntegerField("Contact",validators=[DataRequired()])
@@ -75,7 +75,7 @@ class CustomerConfirmationForm(FlaskForm):
 	submit = SubmitField("Confirm")
 
 class AccountDetailsForm(FlaskForm):
-	acc_no = IntegerField("Account Number", default=Account.generate_acc_no(), validators=[DataRequired()]) 
+	acc_no = IntegerField("Account Number", validators=[DataRequired()]) 
 	acc_balance = FloatField("Account Balance", default=1000, validators=[DataRequired()])
 	acc_type = SelectField("Account Type", validators=[DataRequired()], choices=[('S', "Savings"),('C', "Current")])
 	cust_id = IntegerField("Customer ID",validators=[DataRequired()])
@@ -124,3 +124,6 @@ class TransferMoneyForm(FlaskForm):
 	from_acc = SelectField("From Account Type", validators=[DataRequired()], default='S', choices=[('S', "Savings"),('C', "Current")])
 	to_acc = SelectField("To Account Type", validators=[DataRequired()], default='C', choices=[('S', "Savings"),('C', "Current")])
 	submit = SubmitField("Transfer")
+
+class PrintStatementForm(FlaskForm):
+	pass

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for transaction in transactions %}
+        {{ transaction.transaction_id }}
+        {{ transaction.transaction_date }}
+        {{ transaction.transaction_amount }}
+        {{ transaction.from_acc }}
+        {{ transaction.to_acc }}
+        {{ transaction.action }}
+        {{ transaction.cust_id }}
+        <br>
+    {% endfor %}
+{% endblock %}

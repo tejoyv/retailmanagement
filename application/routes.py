@@ -1,5 +1,5 @@
 from application import app, db, bcrypt, mail
-from application.forms import LoginForm, CustomerDetailsForm, AccountDetailsForm, ContactForm, SearchCustomerForm, CustomerConfirmationForm, SearchAccountForm, AccountConfirmationForm, DepositMoneyForm, WithdrawMoneyForm, TransferMoneyForm
+from application.forms import LoginForm, CustomerDetailsForm, AccountDetailsForm, ContactForm, SearchCustomerForm, CustomerConfirmationForm, SearchAccountForm, AccountConfirmationForm, DepositMoneyForm, WithdrawMoneyForm, TransferMoneyForm, PrintStatementForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
@@ -261,10 +261,24 @@ def transfer(acc_no):
 	return render_template("transfer.html",title="Transfer Money", account=account, form=form)
 
 #============================================Account Statement=======================================#
-@app.route("/acc_statement",methods=["GET","POST"])
-def acc_statement():
-	
-	return render_template("acc_statement.html",title="Account Statement")
+@app.route("/acc_statement/<int:acc_no>",methods=["GET","POST"])
+def acc_statement(acc_no):
+	form = PrintStatementForm()
+	account = Account.query.filter_by(acc_no=acc_no).first()
+	customer = Customer.query.filter_by(cust_id=account.cust_id).first()
+	if form.validate_on_submit():
+		if form.choice.data == 'LT':
+			transactions = customer.transactions
+			transactions = transactions[-form.no_of_transactions.data:]
+			return render_template('show_transactions.html', transactions=transactions, title="Account Statement")
+		elif form.choice.data == 'BD':
+			transactions = customer.transactions
+			statement_transactions = []
+			for transaction in transactions:
+				if transaction.transaction_date >= form.from_date.data and transaction.transaction_date <= form.to_date.data:
+					statement_transactions.append(transaction)
+			return render_template('show_transactions.html', transactions=statement_transactions, title="Account Statement")
+	return render_template("acc_statement.html",title="Account Statement", form=form)
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():

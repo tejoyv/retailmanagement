@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, TextField, SelectField, TextAreaField, BooleanField, FloatField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, TextField, SelectField, TextAreaField, BooleanField, FloatField, RadioField, DateTimeField
 from wtforms.validators import DataRequired, Length, ValidationError,Email
 from application.models import User, Customer, Account
+from datetime import datetime as dt
 
 class LoginForm(FlaskForm):
 	username = StringField("Username", validators=[DataRequired(), Length(min=8)],render_kw={"placeholder": "Username"})
@@ -126,4 +127,8 @@ class TransferMoneyForm(FlaskForm):
 	submit = SubmitField("Transfer")
 
 class PrintStatementForm(FlaskForm):
-	pass
+	choice = RadioField("Get Transactions By :", validators=[DataRequired()], choices=[('LT','Last Transactions'), ('BD', 'Between Dates')], default='BD')
+	no_of_transactions = IntegerField("How Many Transactions?", validators=[], default=10)
+	from_date = DateTimeField("From Date (YYYY-MM-DD)",default=dt.now(), validators=[])
+	to_date = DateTimeField("To Date (YYYY-MM-DD)",default=dt.now(), validators=[])
+	submit = SubmitField("Show Statement")

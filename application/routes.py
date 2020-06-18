@@ -222,10 +222,10 @@ def deposit(acc_no):
 		result = depositMoney(depositAmount=form.depositAmount.data, acc_no=acc_no)
 		if result == "Success":
 			flash("Amount Successfully Deposited...", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 		else:
 			flash("Amount Not Deposited...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 	return render_template("deposit.html",title="Deposit Money", account=account, form=form)
 
 
@@ -238,10 +238,10 @@ def withdraw(acc_no):
 		result = withdrawMoney(withdrawAmount=form.withdrawAmount.data, acc_no=acc_no)
 		if result == "Success":
 			flash("Amount Successfully withdrawn...", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 		else:
 			flash("Amount Not Withdrawn...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 	return render_template("withdraw.html",title="Withdraw Money", account=account, form=form)
 
 #============================================Transfer Money=======================================#
@@ -254,10 +254,10 @@ def transfer(acc_no):
 		result = transferMoney(amount=form.amount.data, cust_id=account.cust_id, from_acc=form.from_acc.data, to_acc=form.to_acc.data)
 		if result == "Success":
 			flash("Amount Successfully Transfered...", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 		else:
 			flash("Amount Not Transfered...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 	return render_template("transfer.html",title="Transfer Money", account=account, form=form)
 
 #============================================Account Statement=======================================#

@@ -132,3 +132,4 @@ class PrintStatementForm(FlaskForm):
 	from_date = DateTimeField("From Date (YYYY-MM-DD)",default=dt.now().date(), validators=[])
 	to_date = DateTimeField("To Date (YYYY-MM-DD)",default=dt.now().date(), validators=[])
 	submit = SubmitField("Show Statement")
+

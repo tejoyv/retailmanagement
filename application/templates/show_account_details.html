@@ -2,7 +2,9 @@
 {% block content %}
     <div class="row" style="margin-left:50px;margin-top: 30px; font-size: large;">
         <div class="col-3"></div>
+        
         <div class="col align-self-center">
+            <legend class="text-info" style="font-weight: bold;">Account Details</legend><hr/>
             <div class="row">
             	<div class="col-6 text-warning" style="font-weight: bold;">Account Number :</div>
             	<div class="col-6">{{ account.acc_no }}</div>
@@ -34,15 +36,15 @@
             
                 {% if session.get('ROLE') == "acc_exec" %}<br/>
             	   <a class="btn btn-danger" href="{{ url_for('delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
-                {% elif session.get('ROLE') == "teller" %}
-                    <div>
+                    {% elif session.get('ROLE') == "teller" %}
+                    <br/>
                         <div class="col">
-                            <a class="btn btn-success" href="{{ url_for('withdraw', acc_no=account.acc_no) }}">Withdraw</a>
-                            <a class="btn btn-success" href="{{ url_for('deposit', acc_no=account.acc_no) }}">Deposit</a>
-                            <a class="btn btn-success" href="{{ url_for('transfer', acc_no=account.acc_no) }}">Transfer</a>
-                            <a class="btn btn-success" href="{{ url_for('acc_statement', acc_no=account.acc_no) }}">Print Statement</a>
+                            <a class="btn btn-success" href="{{ url_for('withdraw', acc_no=account.acc_no) }}" style="margin-right: 20px;">Withdraw</a>
+                            <a class="btn btn-success" href="{{ url_for('deposit', acc_no=account.acc_no) }}"style="margin-right: 20px;">Deposit</a>
+                            <a class="btn btn-success" href="{{ url_for('transfer', acc_no=account.acc_no) }}" style="margin-right: 20px;">Transfer</a>
+                            <a class="btn btn-success" href="{{ url_for('acc_statement', acc_no=account.acc_no) }}" style="margin-right: 20px;">Print Statement</a>
                         </div>
-                    </div>                    
+                                       
                 {% endif %}
             
         </div>

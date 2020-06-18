@@ -66,8 +66,10 @@ def withdrawMoney(withdrawAmount, acc_no=None, cust_id=None, acc_type='S'):
 		return "Failure"
 
 def transferMoney(amount, cust_id, from_acc, to_acc):
-	fromAccount = searchAccount(cust_id=cust_id, acc_type=from_acc)
-	toAccount = searchAccount(cust_id=cust_id, acc_type=to_acc)
+	fromAccount = Account.query.filter_by(cust_id=cust_id, acc_type=from_acc).first()
+	print(fromAccount)
+	toAccount = Account.query.filter_by(cust_id=cust_id, acc_type=to_acc).first()
+	print(toAccount)
 	if fromAccount==None or toAccount==None:
 		return "Failure"
 	else:

@@ -214,7 +214,6 @@ def deposit(acc_no):
 def withdraw(acc_no):
 	form = WithdrawMoneyForm()
 	account = Account.query.filter_by(acc_no=acc_no).first()
-	print(request.method == 'POST', form.validate_on_submit())
 	if form.validate_on_submit():
 		result = withdrawMoney(withdrawAmount=form.withdrawAmount.data, acc_no=acc_no)
 		if result == "Success":
@@ -231,6 +230,7 @@ def transfer(acc_no):
 	form = TransferMoneyForm()
 	account = searchAccount(acc_no=acc_no)
 	if form.validate_on_submit():
+		print(form.amount.data, account.cust_id, form.from_acc.data, form.to_acc.data)
 		result = transferMoney(amount=form.amount.data, cust_id=account.cust_id, from_acc=form.from_acc.data, to_acc=form.to_acc.data)
 		if result == "Success":
 			flash("Amount Successfully Transfered...", category="success")

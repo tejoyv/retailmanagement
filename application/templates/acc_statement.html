@@ -1,134 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-
-    <!-- code block for generate statement form section -->
-    <footer class="container-fluid" id="gtco-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6" id="transfer">
-                    <br />
-                    <div class="form-group required"
-                        style="background-color:#f1f6fd;width: 675px; padding:15px;border-radius:30px;">
-                        <h3 style="color:#1d3ede; margin:20px;"><b>Account Statement</b></h3>
-                        <hr />
-                        <form>
-
-                            <div style="text-align: centre;">
-
-                                <tr>
-                                    <td>
-                                        <h5><label class="control-label">Account ID:</label></h5>
-                                    </td>
-                                    <td><input type="number" name="acc_id" class="form-control" placeholder=" "
-                                            required></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="num" id="num" data-toggle="collapse"
-                                            data-target="#demo1" style="height:25px; width: 25px; margin: 0px 40px;">
-                                    </td>
-                                    <td><label>Last Number of Transaction </label></td>
-                                </tr>
-
-                                <!-- code block activated when 1st radio button is selected -->
-                                <div id="demo1" class="collapse" style="margin:0px 50px;">
-                                    <tr>
-                                        <td><label>Last Number of Transaction: </label><select name="transaction"
-                                                id="transaction">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select></td>
-                                    </tr>
-                                </div>
-                                <br />
-                                <tr>
-                                    <td><input type="radio" name="num" id="date" data-toggle="collapse"
-                                            data-target="#demo" style="height:25px; width: 25px; margin: 0px 40px;">
-                                    </td>
-                                    <td><label>Start-End Dates</label></td>
-                                </tr>
-                                <!-- code block activated when 2nd radio button is selected -->
-                                <div id="demo" class="collapse" style="margin:0px 50px;">
-                                    <tr>
-                                        <td><label>Start Date:</label></td>
-                                        <td><input type="date" name="start date" id="start date" class="form-control"
-                                                format="YYYY-MM-DD"></td>
-
-                                    <tr>
-                                        <td><label>End Date:</label></td>
-                                        <td><input type="date" name="end date" id="end date" class="form-control"></td>
-                                    </tr>
-
-                                </div>
-
-                                </tr>
-                                <br />
-
-                                <button type="button" data-toggle="collapse" data-target="#demo3" class="btn btn-info"
-                                    style="width:200px; margin:0px 150px; border-radius:50px; height:50px;background-image: linear-gradient(-90deg,  #00ace6,  #0080ff);">GET
-                                    STATEMENT</button>
-                                <br />
-                                <br /> <br />
-                            </div>
-                            <!-- code block activated when get statement button is pressed -->
-                            <div id="demo3" class="collapse" style="margin:0px 50px;">
-                                <table class="table table-striped">
-                                    <thead style="background-color:black; color:white;">
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Transition Description</th>
-                                            <th>Credit/Debit</th>
-                                            <th>Balance</th>
-                                        </tr>
-                                    </thead>
-                                    <!-- edit this block -->
-                                    <!-- data should be fetched from DB for statements -->
-                                    <tbody style="text-align:centre;">
-                                        <tr>
-                                            <td>abc</td>
-                                            <td>sgf</td>
-                                            <td>vsjk</td>
-                                            <td>fhv</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <button type="button" onclick="generatePDF()" class="btn btn-secondary">DOWNLOAD AS
-                                    PDF</button>
-                            </div>
-                            <br />
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-8 text-center">
-                <br />
-                <br />
-                <hr />
-                <p>&copy; 2020 Moody Bank. All Rights Reserved. Design by <span style="color: #1d3ede;">AVENGERS</span>.
-                </p>
-            </div>
-        </div>
-        </div>
-    </footer>
-    </div>
-    </div>
-
-
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- owl carousel js-->
-    <script src="owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-
+<form action="" method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.choice.label }}
+    {{ form.choice }}
+    {{ form.no_of_transactions.label }}
+    {{ form.no_of_transactions }}
+    {{ form.from_date.label }}
+    {{ form.from_date }}
+    {{ form.to_date.label }}
+    {{ form.to_date }}
+    {{ form.submit }}
+</form>
 {% endblock %}

@@ -73,14 +73,17 @@ def transferMoney(amount, cust_id, from_acc, to_acc):
 	if fromAccount==None or toAccount==None:
 		return "Failure"
 	else:
-		num_transactions = len(Transaction.query.all())
-		fromAccount.acc_balance -= amount
-		toAccount.acc_balance += amount
-		db.session.commit()
-		transaction = Transaction(transaction_id=num_transactions+1, transaction_amount=amount, from_acc=from_acc, to_acc=to_acc, action="Transfer", cust_id=fromAccount.cust_id)
-		db.session.add(transaction)
-		db.session.commit()
-		return "Success"
+		if fromAccount.acc_balance - amount < 0:
+			return "Failure"
+		else:
+			num_transactions = len(Transaction.query.all())
+			fromAccount.acc_balance -= amount
+			toAccount.acc_balance += amount
+			db.session.commit()
+			transaction = Transaction(transaction_id=num_transactions+1, transaction_amount=amount, from_acc=from_acc, to_acc=to_acc, action="Transfer", cust_id=fromAccount.cust_id)
+			db.session.add(transaction)
+			db.session.commit()
+			return "Success"
 
 def mail_send(fullname,email,message):
 	msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=[email])

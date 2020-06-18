@@ -25,7 +25,7 @@
 			{% if not customer.transactions[-1]%}
 				No Transactions
 			{% else %}
-				{{ customer.transactions[-1].transaction_date }}
+				{{ customer.transactions[-1].transaction_date.strftime("%Y-%B-%d") }}
 			{% endif %}
 			</td>
 			<td><a href="{{ url_for('show_customer_details', cust_id=customer.cust_id) }}">Show Details</a></td>

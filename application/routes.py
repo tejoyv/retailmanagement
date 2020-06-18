@@ -1,5 +1,5 @@
 from application import app, db, bcrypt, mail
-from application.forms import LoginForm, CustomerDetailsForm, AccountDetailsForm, ContactForm, SearchCustomerForm, CustomerConfirmationForm, SearchAccountForm, AccountConfirmationForm, DepositMoneyForm, WithdrawMoneyForm, TransferMoneyForm
+from application.forms import LoginForm, CustomerDetailsForm, AccountDetailsForm, ContactForm, SearchCustomerForm, CustomerConfirmationForm, SearchAccountForm, AccountConfirmationForm, DepositMoneyForm, WithdrawMoneyForm, TransferMoneyForm, PrintStatementForm
 from application.models import User, Customer, Account
 from flask import render_template, redirect, flash, url_for, session, request
 from flask_mail import Message
@@ -222,10 +222,10 @@ def deposit(acc_no):
 		result = depositMoney(depositAmount=form.depositAmount.data, acc_no=acc_no)
 		if result == "Success":
 			flash("Amount Successfully Deposited...", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 		else:
 			flash("Amount Not Deposited...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 	return render_template("deposit.html",title="Deposit Money", account=account, form=form)
 
 
@@ -238,10 +238,10 @@ def withdraw(acc_no):
 		result = withdrawMoney(withdrawAmount=form.withdrawAmount.data, acc_no=acc_no)
 		if result == "Success":
 			flash("Amount Successfully withdrawn...", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 		else:
 			flash("Amount Not Withdrawn...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 	return render_template("withdraw.html",title="Withdraw Money", account=account, form=form)
 
 #============================================Transfer Money=======================================#
@@ -254,17 +254,32 @@ def transfer(acc_no):
 		result = transferMoney(amount=form.amount.data, cust_id=account.cust_id, from_acc=form.from_acc.data, to_acc=form.to_acc.data)
 		if result == "Success":
 			flash("Amount Successfully Transfered...", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 		else:
 			flash("Amount Not Transfered...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('show_account_details', acc_no=account.acc_no))
 	return render_template("transfer.html",title="Transfer Money", account=account, form=form)
 
 #============================================Account Statement=======================================#
-@app.route("/acc_statement",methods=["GET","POST"])
-def acc_statement():
-	
-	return render_template("acc_statement.html",title="Account Statement")
+@app.route("/acc_statement/<int:acc_no>",methods=["GET","POST"])
+def acc_statement(acc_no):
+	form = PrintStatementForm()
+	account = Account.query.filter_by(acc_no=acc_no).first()
+	customer = Customer.query.filter_by(cust_id=account.cust_id).first()
+	if form.validate_on_submit():
+		if form.choice.data == 'LT':
+			transactions = customer.transactions
+			transactions = transactions[-form.no_of_transactions.data:]
+			return render_template('show_transactions.html', transactions=transactions, title="Account Statement", account=account)
+		elif form.choice.data == 'BD':
+			transactions = customer.transactions
+			statement_transactions = []
+			for transaction in transactions:
+				if transaction.transaction_date >= form.from_date.data and transaction.transaction_date <= form.to_date.data:
+					statement_transactions.append(transaction)
+			return render_template('show_transactions.html', transactions=statement_transactions, title="Account Statement", account=account)
+	return render_template("acc_statement.html",title="Account Statement", form=form)
+
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():

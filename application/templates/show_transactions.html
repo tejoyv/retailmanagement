@@ -2,7 +2,7 @@
 {% block content %}
     {% for transaction in transactions %}
         {{ transaction.transaction_id }}
-        {{ transaction.transaction_date }}
+        {{ transaction.transaction_date.strftime("%Y-%B-%d") }}
         {{ transaction.transaction_amount }}
         {{ transaction.from_acc }}
         {{ transaction.to_acc }}

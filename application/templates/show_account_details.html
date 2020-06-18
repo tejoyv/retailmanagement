@@ -29,7 +29,7 @@
             </div>
             <div class="row">
             	<div class="col-6">Account Created :</div>
-            	<div class="col-6">{{ account.acc_createDate }}</div>
+            	<div class="col-6">{{ account.acc_createDate.strftime("%Y-%B-%d") }}</div>
             </div>
             <div class="row">
                 {% if session.get('ROLE') == "acc_exec" %}

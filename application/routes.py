@@ -281,7 +281,6 @@ def acc_statement(acc_no):
 	return render_template("acc_statement.html",title="Account Statement", form=form)
 
 
-
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
 	session['USER_ID'] = None

@@ -28,21 +28,12 @@
                 {% endif %}
             </div><br/>
             <div class="row">
-<<<<<<< HEAD
-            	<div class="col-6">Account Created :</div>
-            	<div class="col-6">{{ account.acc_createDate.strftime("%Y-%B-%d") }}</div>
-            </div>
-            <div class="row">
-                {% if session.get('ROLE') == "acc_exec" %}
-            	   <a class="btn btn-success" href="{{ url_for('delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
-=======
             	<div class="col-6 text-warning" style="font-weight: bold;">Account Created :</div>
             	<div class="col-6">{{ account.acc_createDate }}</div>
             </div><br/>
             
                 {% if session.get('ROLE') == "acc_exec" %}<br/>
             	   <a class="btn btn-danger" href="{{ url_for('delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
->>>>>>> 21583070b2fb518615c4c6a6e7d79ea813be7b26
                 {% elif session.get('ROLE') == "teller" %}
                     <div>
                         <div class="col">
@@ -53,7 +44,6 @@
                         </div>
                     </div>                    
                 {% endif %}
-            
         </div>
         <div class="col-3"></div>
     </div>

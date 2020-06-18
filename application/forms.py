@@ -129,6 +129,6 @@ class TransferMoneyForm(FlaskForm):
 class PrintStatementForm(FlaskForm):
 	choice = RadioField("Get Transactions By :", validators=[DataRequired()], choices=[('LT','Last Transactions'), ('BD', 'Between Dates')], default='BD')
 	no_of_transactions = IntegerField("How Many Transactions?", validators=[], default=10)
-	from_date = DateTimeField("From Date (YYYY-MM-DD)",default=dt.now(), validators=[])
-	to_date = DateTimeField("To Date (YYYY-MM-DD)",default=dt.now(), validators=[])
+	from_date = DateTimeField("From Date (YYYY-MM-DD)",default=dt.now().date(), validators=[])
+	to_date = DateTimeField("To Date (YYYY-MM-DD)",default=dt.now().date(), validators=[])
 	submit = SubmitField("Show Statement")

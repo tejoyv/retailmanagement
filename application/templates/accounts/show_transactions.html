@@ -1,67 +1,105 @@
 {% extends "main/layout.html" %}
 {% block content %}
+
+    <!-- jQuery library -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    <script>
+        function convertHTMLtoPDF() {
+            var doc = new jsPDF({
+                orientation: 'landscape'
+            });
+            var elementHTML = $('#content').html();
+            var specialElementHandlers = {
+                '#elementH': function (element, renderer) {
+                    return true;
+                }
+            };
+            doc.fromHTML(elementHTML, 30, 30, {
+                'width': 300,
+                'elementHandlers': specialElementHandlers
+            });
+
+            // Save the PDF
+            doc.save('acc_statement.pdf');
+        }
+    </script>
+
+
+
+
     <div class="row" style="font-size: large;">
         <div class="col-3"></div>
-        <div class="col align-self-center">
-            <legend class="text-info" style="font-weight: bold;">Detailed Statement</legend><hr/>
-            <div class="row">
-                <div class="col-6 text-warning",style="font-weight: bold;">Account Number :</div><br/><br/>
-                <div class="col-6">{{ account.acc_no }}</div>
-            </div>
-            <div class="row">
-                <div class="col-6 text-warning",style="font-weight: bold;">Owner Name :</div><br/><br/>
-                <div class="col-6">{{ account.Owner.cust_name }}</div>
-            </div>
-            <div class="row">
-                <div class="col-6 text-warning",style="font-weight: bold;">Owner ID :</div><br/><br/>
-                <div class="col-6">{{ account.cust_id }}</div>
-            </div>
-            <div class="row">
-                <div class="col-6 text-warning",style="font-weight: bold;">Account Balance :</div><br/><br/>
-                <div class="col-6">{{ account.acc_balance }}</div>
-            </div>
-            <div class="row">
-                <div class="col-6 text-warning",style="font-weight: bold;">Account Type :</div><br/><br/>
-                {% if account.acc_type == 'S'%}
-                <div class="col-6">Savings</div>
-                {% elif account.acc_type == 'C' %}
-                <div class="col-6">Current</div>
-                {% endif %}
-            </div>
-            <div class="row">
-                <div class="col-6 text-warning",style="font-weight: bold;">Account Created :</div><br/><br/>
-                <div class="col-6">{{ account.acc_createDate.strftime("%Y-%B-%d") }}</div>
-            </div>
-            <div class="row">
-                <table class="table" id="tblexportData">
-                    <tr class="table-primary">
-                        <th>Transaction ID</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>From Account</th>
-                        <th>To Account</th>
-                        <th>Action</th>
-                    </tr>
-                    {% for transaction in transactions %}
-                    <tr>
-                        <td>{{ transaction.transaction_id }}</td>
-                        <td>{{ transaction.transaction_date.strftime("%Y-%B-%d") }}</td>
-                        <td>{{ transaction.transaction_amount }}</td>
-                        <td>{{ transaction.from_acc }}</td>
-                        <td>{{ transaction.to_acc }}</td>
-                        <td>{{ transaction.action }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
+        <div id="content">
+            <div class="col align-self-center">
+                <legend class="text-info" style="font-weight: bold;">Detailed Statement</legend><hr/>
                 <div class="row">
-                    <button onclick="exportToExcel('tblexportData', 'user-data')" class="btn btn-success">Export Table Data To Excel File</button>
-                    <div class="col"><a class="btn btn-primary" href="{{ url_for('accounts.acc_statement', acc_no=account.acc_no) }}">Go Back</a></div>
+                    <div class="col-6 text-warning",style="font-weight: bold;">Account Number :</div><br/><br/>
+                    <div class="col-6">{{ account.acc_no }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-warning",style="font-weight: bold;">Owner Name :</div><br/><br/>
+                    <div class="col-6">{{ account.Owner.cust_name }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-warning",style="font-weight: bold;">Owner ID :</div><br/><br/>
+                    <div class="col-6">{{ account.cust_id }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-warning",style="font-weight: bold;">Account Balance :</div><br/><br/>
+                    <div class="col-6">{{ account.acc_balance }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-warning",style="font-weight: bold;">Account Type :</div><br/><br/>
+                    {% if account.acc_type == 'S'%}
+                    <div class="col-6">Savings</div>
+                    {% elif account.acc_type == 'C' %}
+                    <div class="col-6">Current</div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col-6 text-warning",style="font-weight: bold;">Account Created :</div><br/><br/>
+                    <div class="col-6">{{ account.acc_createDate.strftime("%Y-%B-%d") }}</div>
+                </div>
+                <div class="row">
+                    <table class="table" id="tblexportData">
+                        <tr class="table-primary">
+                            <th>Transaction ID</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>From Account</th>
+                            <th>To Account</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.transaction_id }}</td>
+                            <td>{{ transaction.transaction_date.strftime("%Y-%B-%d") }}</td>
+                            <td>{{ transaction.transaction_amount }}</td>
+                            <td>{{ transaction.from_acc }}</td>
+                            <td>{{ transaction.to_acc }}</td>
+                            <td>{{ transaction.action }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
+            <div class="col-3"></div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <button onclick="exportToExcel('tblexportData', 'user-data');" class="btn btn-success">Export Table Data To Excel File</button>
+        <div class="col"></div>
+        <button onclick="convertHTMLtoPDF();" class="btn btn-success">Export Table Data To PDF File</button>
+        <div class="col"><a class="btn btn-primary" href="{{ url_for('accounts.acc_statement', acc_no=account.acc_no) }}">Go Back</a></div>
         <div class="col-3"></div>
     </div>
-
+    <div id="elementH"></div>
+    <br><br><br>
 
     <script type="text/javascript">
     function exportToExcel(tableID, filename = ''){

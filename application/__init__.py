@@ -11,4 +11,10 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 
-from application import routes
+from application.customers.routes import customers
+from application.main.routes import main
+from application.accounts.routes import accounts
+
+app.register_blueprint(customers)
+app.register_blueprint(main)
+app.register_blueprint(accounts)

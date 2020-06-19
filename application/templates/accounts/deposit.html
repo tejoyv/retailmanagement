@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "main/layout.html" %}
 {% block content %}
     <div class="row" style="font-size: large;">
         <div class="col-3"></div>
@@ -29,7 +29,14 @@
                     {{ form.hidden_tag() }}
                     {{ form.depositAmount.label(class="text-warning",style="font-weight: bold;") }} : 
                     {{ form.depositAmount(style="margin-left:180px;") }}
-                    <br/><br/> <br/>   {{ form.submit(class="btn btn-success",style="margin-left:160px;") }}
+                    <br/><br/><br/>
+                    <div class="row">
+                        <div class="col col-3"></div>
+                        <div class="col align-self-center">
+                            {{ form.submit(class="btn btn-danger") }}
+                        </div>
+                        <div class="col col-3"><a class="btn btn-primary" href="{{ url_for('main.show_account_details', acc_no=account.acc_no) }}">Go Back</a></div>
+                    </div>
                 </form>
             </div>
         </div>

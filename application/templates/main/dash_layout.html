@@ -38,9 +38,9 @@
               Customer Operations
             </a>
             <div class="dropdown-menu" aria-labelledby="customerOperations">
-              <a class="dropdown-item" href="{{ url_for('create_customer') }}">Create Customer</a>
-              <a class="dropdown-item" href="{{ url_for('view_customers_status') }}">View All Customer</a>
-              <a class="dropdown-item" href="{{ url_for('search_customer') }}">Search Customer</a>
+              <a class="dropdown-item" href="{{ url_for('customers.create_customer') }}">Create Customer</a>
+              <a class="dropdown-item" href="{{ url_for('main.view_customers_status') }}">View All Customer</a>
+              <a class="dropdown-item" href="{{ url_for('customers.search_customer') }}">Search Customer</a>
             </div>
           </li>
 
@@ -49,9 +49,9 @@
               Account Operations
             </a>
             <div class="dropdown-menu" aria-labelledby="accountOperations">
-              <a class="dropdown-item" href="{{ url_for('create_account') }}">Create Accounts</a>
-              <a class="dropdown-item" href="{{ url_for('view_accounts_status') }}">View All Accounts</a>
-              <a class="dropdown-item" href="{{ url_for('search_account') }}">Search Accounts</a>
+              <a class="dropdown-item" href="{{ url_for('accounts.create_account') }}">Create Accounts</a>
+              <a class="dropdown-item" href="{{ url_for('main.view_accounts_status') }}">View All Accounts</a>
+              <a class="dropdown-item" href="{{ url_for('accounts.search_account') }}">Search Accounts</a>
             </div>
           </li>
           </ul>
@@ -62,7 +62,7 @@
               Account Operations
             </a>
             <div class="dropdown-menu" aria-labelledby="accountOperations">
-              <a class="dropdown-item" href="{{ url_for('search_account') }}">Search Accounts</a>
+              <a class="dropdown-item" href="{{ url_for('accounts.search_account') }}">Search Accounts</a>
             </div>
           </li>
           </ul>
@@ -74,7 +74,7 @@
                 </ul>
           {% else %}
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}" style="color: #007bff;font-weight: bold;">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}" style="color: #007bff;font-weight: bold;">Home</a></li>
                   <li class="nav-item"><a class="nav-link" href="#services" style="color: #007bff;font-weight: bold;font-weight: bold;">Service</a></li>
                   <li class="nav-item"><a class="nav-link" href="#contact" style="color: #007bff;font-weight: bold;font-weight: bold;">Contact</a></li>
               </ul>
@@ -84,9 +84,9 @@
 
             <form class="form-inline my-2 my-lg-0">
                 {% if not session.get('USER_ID') %}
-                <a href="{{ url_for('login') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a>
+                <a href="{{ url_for('main.login') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a>
                 {% else %}
-                <a href="{{ url_for('logout') }}" class="btn btn-info my-2 my-sm-0 text-uppercase">Logout</a>
+                <a href="{{ url_for('main.logout') }}" class="btn btn-info my-2 my-sm-0 text-uppercase">Logout</a>
                 {% endif %}
             </form>
         </div>

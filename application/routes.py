@@ -53,7 +53,7 @@ def create_customer():
 	        db.session.add(customer)
 	        db.session.commit()
 	        flash("Customer Successfully Created!!!", category="success")
-	        return redirect(url_for('home'))
+	        return redirect(url_for('dashboard'))
 	    return render_template("create_customer.html",form=form, title="Create Customer")
 
 
@@ -73,10 +73,10 @@ def delete_customer(cust_id):
 			db.session.delete(customer)
 			db.session.commit()
 			flash("Customer Successfully Deleted!!!", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('dashboard'))
 		elif (not form.confirm.data) or (form.cust_id.data != cust_id):
 			flash("Wrong input data!!!", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('dashboard'))
 	return render_template('delete_confirmation_form.html', title="Confirm Delete", form=form)
 
 
@@ -95,7 +95,7 @@ def update_customer_details(cust_id):
 		customer.cust_age = form.cust_age.data
 		db.session.commit()
 		flash("Customer Details are updated!!!", category="success")
-		return redirect(url_for('home'))
+		return redirect(url_for('dashboard'))
 	return render_template('update_customer_details.html', cust_id=cust_id, title="Update Customer Details", form=form)
 
 @app.route("/update_customer/<int:cust_id>", methods=['GET', 'POST'])
@@ -108,7 +108,7 @@ def update_customer(cust_id):
 			return render_template('update_customer_details.html', title="Update Details", form=form, customer=customer)
 		else:
 			flash("Wrong input data!!!", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('dashboard'))
 	return render_template('update_confirmation_form.html', title="Confirm Delete", form=form)
 
 #============================================Search Customer=======================================#
@@ -122,7 +122,7 @@ def search_customer():
 			customer = searchCustomer(ssn=form.ssn_id.data, cust_id=form.cust_id.data)
 			if customer == None:
 				flash("Customer not found...", category="danger")
-				return redirect(url_for('home'))
+				return redirect(url_for('dashboard'))
 			else:
 				return render_template('show_customer_details.html', customer=customer, title="Show Customer Details")
 		else:
@@ -144,7 +144,7 @@ def show_customer_details(cust_id):
 	customer = Customer.query.filter_by(cust_id=cust_id).first()
 	if customer == None:
 		flash("Customer not found...", category="danger")
-		return redirect(url_for('home'))
+		return redirect(url_for('dashboard'))
 	else:
 		return render_template('show_customer_details.html', customer=customer, title="Show Customer Details")
 
@@ -163,7 +163,7 @@ def show_account_details(acc_no):
 	account = Account.query.filter_by(acc_no=acc_no).first()
 	if account == None:
 		flash("Account not found...", category="danger")
-		return redirect(url_for('home'))
+		return redirect(url_for('dashboard'))
 	else:
 		return render_template('show_account_details.html', account=account, title="Show Account Details")
 
@@ -180,7 +180,7 @@ def create_account():
 	        db.session.add(account)
 	        db.session.commit()
 	        flash("Account Successfully Created!!!", category="success")
-	        return redirect(url_for('home'))
+	        return redirect(url_for('dashboard'))
 	    return render_template("create_account.html",form=form, title="Create Customer")
 
 #============================================Delete Account=======================================#
@@ -193,10 +193,10 @@ def delete_account(acc_no):
 			db.session.delete(account)
 			db.session.commit()
 			flash("Account Successfully Deleted!!!", category="success")
-			return redirect(url_for('home'))
+			return redirect(url_for('dashboard'))
 		elif (not form.confirm.data) or (form.acc_no.data != acc_no):
 			flash("Wrong input data!!!", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('dashboard'))
 	return render_template('delete_confirmation_form.html', title="Confirm Delete", form=form)
 
 #============================================Search Account=======================================#
@@ -207,7 +207,7 @@ def search_account():
 		account = searchAccount(acc_no=form.acc_no.data, cust_id=form.cust_id.data, acc_type=form.acc_type.data)
 		if account == None:
 			flash("Acount not found...", category="danger")
-			return redirect(url_for('home'))
+			return redirect(url_for('dashboard'))
 		else:
 			return render_template('show_account_details.html', account=account, title="Show Account Details")
 	return render_template('search_account.html', form=form, title="Search Account")

@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "main/layout.html" %}
 {% block content %}
     <div class="row" style="font-size: large;">
         <div class="col-3"></div>
@@ -53,9 +53,10 @@
                     </tr>
                     {% endfor %}
                 </table>
-                <div>
-            <button onclick="exportToExcel('tblexportData', 'user-data')" class="btn btn-success">Export Table Data To Excel File</button>
-        </div>
+                <div class="row">
+                    <button onclick="exportToExcel('tblexportData', 'user-data')" class="btn btn-success">Export Table Data To Excel File</button>
+                    <div class="col"><a class="btn btn-primary" href="{{ url_for('accounts.acc_statement', acc_no=account.acc_no) }}">Go Back</a></div>
+                </div>
             </div>
         </div>
         <div class="col-3"></div>

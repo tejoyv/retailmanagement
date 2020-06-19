@@ -1,0 +1,47 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<br/>
+<br/>
+<footer class="container-fluid" id="gtco-footer">
+	<form action="" method="POST" novalidate>
+	{{ form.hidden_tag() }}
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6" id="contact">
+				<br />
+				<h2 style="color:#1d3ede;margin-left: 140px;">
+					<centre>Login Form </centre>
+				</h2><br/>
+				<div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                    	{{ form.username(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                    {% else %}
+                        {{ form.username(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                    	{{ form.password(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                    {% else %}
+                        {{ form.password(class="form-control") }}
+                    {% endif %}
+                </div>
+				{{ form.submit(class="submit-button") }}<br/>
+
+			</div>
+			</form>
+</footer>
+
+{% endblock content %}

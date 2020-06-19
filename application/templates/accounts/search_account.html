@@ -1,28 +1,28 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "main/layout.html" %}
+{% block content%}
     <form class="pt-3" action="" method="POST">
         {{ form.hidden_tag() }}
-        <div class="row" style="font-size: large;">
+        <div class="row" style="font-size: larger;">
             <div class="col-4"></div>
             <div class="col align-self-center">
                 <fieldset class="form-group">
-                    <legend style="font-weight: bold;" class="text-info">Search Customer</legend><hr/>
+                    <legend class="text-info" style="font-weight: bold;">Search Account</legend><hr/>
                     <div class="form-group">
-                        {{ form.ssn_id.label(class="form-control-label") }}
-                        {% if form.ssn_id.errors %}
-                        {{ form.ssn_id(class="form-control is-invalid") }}
+                        {{ form.acc_no.label(class="form-control-label") }}
+                        {% if form.acc_no.errors %}
+                        {{ form.acc_no(class="form-control is-invalid") }}
                             <div class="alert alert-danger">
-                                {% for error in form.ssn_id.errors %}
+                                {% for error in form.acc_no.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                         {% else %}
-                        {{ form.ssn_id(class="form-control") }}
+                        {{ form.acc_no(class="form-control") }}
                         {% endif %}
                     </div>
                     <div class="row">
-                        <div class="col-5"></div><br/><br/>
-                        <div class="col-2" style="font-weight: bolder;">OR</div><br/>
+                        <div class="col-5"></div>
+                        <div class="col-2"><b>OR</b></div>
                         <div class="col-5"></div>
                     </div>
                     <div class="form-group">
@@ -38,8 +38,21 @@
                         {{ form.cust_id(class="form-control") }}
                         {% endif %}
                     </div>
-                    <div class="form-group"><br/>
-                        {{ form.submit(class="form-control btn-primary") }}
+                    <div class="form-group">
+                        {{ form.acc_type.label(class="form-control-label") }}
+                        {% if form.acc_type.errors %}
+                        {{ form.acc_type(class="form-control is-invalid") }}
+                            <div class="alert alert-danger">
+                                {% for error in form.acc_type.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.acc_type(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                      <br/>  {{ form.submit(class="form-control btn-primary") }}
                     </div>
                 </fieldset>
             </div>

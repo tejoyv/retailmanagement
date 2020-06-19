@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "main/layout.html" %}
 {% block content %}
     <div class="row" style="margin-left:50px;margin-top: 30px; font-size: large;">
         <div class="col-3"></div>
@@ -31,20 +31,19 @@
             </div><br/>
             <div class="row">
             	<div class="col-6 text-warning" style="font-weight: bold;">Account Created :</div>
-            	<div class="col-6">{{ account.acc_createDate }}</div>
+            	<div class="col-6">{{ account.acc_createDate.strftime("%Y-%B-%d") }}</div>
             </div><br/>
             
                 {% if session.get('ROLE') == "acc_exec" %}<br/>
-            	   <a class="btn btn-danger" href="{{ url_for('delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
+            	   <a class="btn btn-danger" href="{{ url_for('accounts.delete_account', acc_no=account.acc_no) }}">Delete this account!!!</a>
                     {% elif session.get('ROLE') == "teller" %}
                     <br/>
                         <div class="col">
-                            <a class="btn btn-success" href="{{ url_for('withdraw', acc_no=account.acc_no) }}" style="margin-right: 20px;">Withdraw</a>
-                            <a class="btn btn-success" href="{{ url_for('deposit', acc_no=account.acc_no) }}"style="margin-right: 20px;">Deposit</a>
-                            <a class="btn btn-success" href="{{ url_for('transfer', acc_no=account.acc_no) }}" style="margin-right: 20px;">Transfer</a>
-                            <a class="btn btn-success" href="{{ url_for('acc_statement', acc_no=account.acc_no) }}" style="margin-right: 20px;">Print Statement</a>
-                        </div>
-                                       
+                            <a class="btn btn-success" href="{{ url_for('accounts.withdraw', acc_no=account.acc_no) }}" style="margin-right: 20px;">Withdraw</a>
+                            <a class="btn btn-success" href="{{ url_for('accounts.deposit', acc_no=account.acc_no) }}"style="margin-right: 20px;">Deposit</a>
+                            <a class="btn btn-success" href="{{ url_for('accounts.transfer', acc_no=account.acc_no) }}" style="margin-right: 20px;">Transfer</a>
+                            <a class="btn btn-success" href="{{ url_for('accounts.acc_statement', acc_no=account.acc_no) }}" style="margin-right: 20px;">Print Statement</a>
+                        </div>         
                 {% endif %}
         </div>
         <div class="col-3"></div>

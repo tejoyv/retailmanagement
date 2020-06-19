@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "main/layout.html" %}
 {% block content %}
 
 <h2 class="text-info" style="font-weight: bold;">Total Accounts in the Bank - {{ accounts.total }}</h2>
@@ -22,7 +22,7 @@
 		<th scope="row">{{ account.cust_id }}</th>
 		<td>{{ account.acc_no }}</td>
 		<td>{{ account.acc_type }}</td>
-		<td>{{ account.acc_createDate }}</td>
+		<td>{{ account.acc_createDate.strftime("%Y-%B-%d") }}</td>
 		<td>{{ account.acc_balance }}</td>
 		<td>
 			{% if not account.Owner.transactions[-1]%}
@@ -31,7 +31,7 @@
 				{{ account.Owner.transactions[-1].transaction_date.strftime("%Y-%B-%d") }}
 			{% endif %}
 		</td>
-		<td><a href="{{ url_for('show_account_details', acc_no=account.acc_no) }}">Show Details</a></td>
+		<td><a href="{{ url_for('main.show_account_details', acc_no=account.acc_no) }}">Show Details</a></td>
 	</tr>
 	{% endfor%}
 </table>
@@ -43,7 +43,7 @@
 		{% for page_num in accounts.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
 			{% if page_num %}
 
-				<li class="page-item"><a class="page-link"href="{{ url_for('view_accounts_status', page=page_num)}}">{{page_num}}</a></li>	
+				<li class="page-item"><a class="page-link"href="{{ url_for('main.view_accounts_status', page=page_num)}}">{{page_num}}</a></li>	
 
 			{% else %}
 			...		
@@ -51,7 +51,7 @@
 		{% endfor %}
 		</ul>
 		<ul>
-			<a href="{{ url_for('view_accounts_status') }}" class="btn btn-primary">Refresh Page</a>
+			<a href="{{ url_for('main.view_accounts_status') }}" class="btn btn-primary">Refresh Page</a>
 		</ul>
 	</div>
 </nav>

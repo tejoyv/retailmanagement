@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "main/layout.html" %}
 {% block content %}
     <div class="row" style="margin-left:50px;margin-top: 30px; font-size: large;">
         <div class="col-3"></div>
@@ -36,9 +36,9 @@
             	<div class="col-6">{{ customer.cust_state }}</div>
             </div><br/><br/>
             <div class="row" style="margin-left: 5px;">
-            	<a class="btn btn-primary" href="{{ url_for('update_customer', cust_id=customer.cust_id) }}">Update this customer!!!</a>
+            	<a class="btn btn-primary" href="{{ url_for('customers.update_customer', cust_id=customer.cust_id) }}">Update this customer!!!</a>
             	<div class="col-1"></div>
-            	<a class="btn btn-danger" href="{{ url_for('delete_customer', cust_id=customer.cust_id) }}">Delete this customer!!!</a>
+            	<a class="btn btn-danger" href="{{ url_for('customers.delete_customer', cust_id=customer.cust_id) }}">Delete this customer!!!</a>
             </div>
         </div>
         <div class="col-3"></div>

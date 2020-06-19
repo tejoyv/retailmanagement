@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "main/layout.html" %}
 {% block content %}
 
 <h2 class="text-info" style="font-weight: bold;">Total Customers in the Bank - {{ customers.total }}</h2> <br/>
@@ -28,7 +28,7 @@
 				{{ customer.transactions[-1].transaction_date.strftime("%Y-%B-%d") }}
 			{% endif %}
 			</td>
-			<td><a href="{{ url_for('show_customer_details', cust_id=customer.cust_id) }}">Show Details</a></td>
+			<td><a href="{{ url_for('main.show_customer_details', cust_id=customer.cust_id) }}">Show Details</a></td>
 		</tr>
 		{% endfor%}
 	</tbody>
@@ -40,14 +40,14 @@
 			{% for page_num in customers.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
 				{% if page_num %}
 
-				  <li class="page-item"><a class="page-link" href="{{ url_for('view_customers_status', page=page_num)}}">{{page_num}}</a></li>
+				  <li class="page-item"><a class="page-link" href="{{ url_for('main.view_customers_status', page=page_num)}}">{{page_num}}</a></li>
 				  {% else %}		
 				...		
 				{% endif %}
 			{% endfor %}
 		</ul>
 		<ul>
-			<a href="{{ url_for('view_customers_status') }}" class="btn btn-primary">Refresh Page</a>
+			<a href="{{ url_for('main.view_customers_status') }}" class="btn btn-primary">Refresh Page</a>
 		</ul>
 	</div>
 </nav>

@@ -89,4 +89,4 @@ def mail_send(fullname,email,message):
 	msg = Message("Hello",sender="moodybanktcs@gmail.com",recipients=[email])
 	msg.body = message
 	mail.send(msg)
-	return "Mail Sent"	
+	return "Success"

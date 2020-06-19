@@ -1,0 +1,33 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row" style="font-size: large;">
+        <legend class="text-info" style="font-weight: bold;">Account Statement</legend><hr/>
+        <div class="col-3"></div>
+        <div class="col align-self-center">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <legend class="text-info" style="font-weight: bold;">Transaction Statement</legend><hr/>
+            {{ form.choice.label(class="col-6 text-warning",style="font-weight: bold;") }} 
+            {{ form.choice }}
+            {{ form.no_of_transactions.label(class="col-6 text-warning",style="font-weight: bold;") }}
+            {{ form.no_of_transactions }}<br/><br/>
+            {{ form.from_date.label(class="col-6 text-warning",style="font-weight: bold;") }}
+            {{ form.from_date }}<br/><br/>
+            {{ form.to_date.label(class="col-6 text-warning",style="font-weight: bold;") }}
+            {{ form.to_date }}<br/><br/>
+            <br/> 
+            <div class="row">
+                <div class="col col-3"></div>
+                <div class="col align-self-center">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+                <div class="col col-3">
+                    <a class="btn btn-primary" href="{{ url_for('main.show_account_details', acc_no=acc_no) }}">Go Back</a>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
